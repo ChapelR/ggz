@@ -14,6 +14,13 @@ This project is essentially a stripped-down web-based visual novel engine. It re
 
 ### Credits
 
+Thank you to the [Hoyostans](https://hoyostans.be/) community for retranslating the game. If you helped in the retranslation effort and are not credited here, please contact me.
+- Mister Spaceman
+- Demonbanex
+- Bun Bun
+- Max
+- Darkmiz
+
 Open source software used:
 - [Twine](https://twinery.org/)
 - [Tweego](https://www.motoslave.net/tweego/)

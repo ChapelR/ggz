@@ -10,7 +10,7 @@
         {
             name : "Chapter of Memories",
             episodes : 4
-        },
+        }
     ];
 
     function getChapterName (chapter, episode) {
