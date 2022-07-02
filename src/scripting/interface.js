@@ -4,9 +4,10 @@
     window.TYPING = false;
     window.RECLICK_LOCK = false;
 
-    const SPLASH_SCREENS = 8;
+    const SPLASH_SCREENS = 6; // 0-based, so less one
 
     setup.typeSkip = function typeSkip () {
+        // activate the "skip key" to skip typing animations
         const skipKeyEv = jQuery.Event('keydown', {
             key : Config.macros.typeSkipKey
         });
@@ -14,6 +15,7 @@
         $(document.documentElement).trigger(skipKeyEv);
     };
 
+    // top bar clickables
     $("#menu").ariaClick({ label : "Open menu" }, () => {
         $("#drawer").toggleClass("hidden");
         if ($("#drawer").hasClass("hidden")) {
@@ -22,7 +24,6 @@
             SimpleAudio.tracks.get("close").play();
         }
     });
-
     $("#sound").ariaClick({ label : "Mute/unmute audio" }, () => {
         SimpleAudio.tracks.get("tab").play();
         if ($("#sound").hasClass("on")) {
@@ -34,7 +35,6 @@
         }
         $("#sound").toggleClass("on");
     });
-
     $("#text").ariaClick({ label : "Show/hide text" }, () => {
         SimpleAudio.tracks.get("tab").play();
         if ($("#text").hasClass("on") && ($(".shaded-box")[0] || $("#vn-box")[0])) {
@@ -46,7 +46,6 @@
         }
         $("#text").toggleClass("on");
     });
-
     $("#fullscreen").ariaClick({ label : "Enter/exit fullscreen" }, () => {
         SimpleAudio.tracks.get("tab").play();
         Fullscreen.toggle({ navigationUI : "show" });
@@ -58,7 +57,6 @@
             $("#fullscreen").addClass("off");
         }
     });
-
     $("#help").ariaClick({ label : "Display help" }, () => {
         SimpleAudio.tracks.get("tab").play();
         Dialog.setup("Help", "help");
@@ -66,6 +64,7 @@
         Dialog.open();
     });
 
+    // passage transition upkeep
     $(document).on(':passagedisplay', () => {
         TYPING = false;
 
@@ -84,12 +83,14 @@
 
     });
 
+    // bind click sound to buttons
     $(document).on(":passageend", () => {
         $("button").on("click", () => {
             SimpleAudio.tracks.get("select").play();
         });
     });
 
+    // set global TYPING flag
     $(document).on(":typingstart", () => { TYPING = true; });
     $(document).on(":typingcomplete", () => { TYPING = false; });
 
@@ -132,7 +133,7 @@
 
     // play some audio when possible
     $(document).one("click mousedown keydown touchstart", () => {
-        if( tags().includes("start_bgm")) {
+        if(passage() === "Start") {
             SimpleAudio.tracks.get("001").loop(true).play();
         }
     });

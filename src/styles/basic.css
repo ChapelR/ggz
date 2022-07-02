@@ -205,6 +205,8 @@ nav h1 {
     padding: 4rem 2rem 2rem 2rem;
     height: 12rem;
     border-radius: 0 0 6px 0;
+    max-width: 80%;
+    max-height: 100%;
 }
 
 #drawer.hidden {

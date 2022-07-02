@@ -13,6 +13,10 @@
         },
     ];
 
+    function getChapterName (chapter, episode) {
+        return setup.chapters.story.main[chapter].episodes[episode - 1].name;
+    }
+
     function loadChapter (chapter, episode) {
         const chapterData = State.variables.chapter = setup.chapters.story.main[chapter].episodes[episode - 1];
         
@@ -37,7 +41,7 @@
         const $ul = $(document.createElement("ul")).addClass("chapter-select");
         CHAPTER_LIST.forEach( (chapter, idx) => {
             for (let i = 1; i <= chapter.episodes; i++) {
-                const curr = chapter.name + " Ep " + i;
+                const curr = getChapterName(idx, i);
                 const $a = createA(curr, idx, i);
                 const check = State.variables.completed.includes(curr);
                 const $checkmark = $(document.createElement("span")).append(" &check; ").appendTo($a).hide();

@@ -27,7 +27,7 @@ When in visual novel mode, press the space bar or click on the text window to ad
 As you complete story episodes, check marks will appear next to them on the chapter select screen to help you keep track of what you've already seen.
 
 :: StoryDrawer [nobr]
-<h2>Current Cutscene: <span id="current-chapter"><<= $loaded ? $loaded.current : "&hellip;">></span></h2>
+<h2 id="current-chapter"><<= $chapter ? ($chapter.name || $loaded && $loaded.current ) : "&hellip;">></h2>
 <p><<button [[Chapter Selection|Chapter Select]]>>
     <<audio ":playing" stop>>
     <<audio "001" play loop volume 1>>
@@ -35,13 +35,13 @@ As you complete story episodes, check marks will appear next to them on the chap
 <</button>></p>
 <p><<button "About">><<run Dialog.setup("About", "about");Dialog.wiki(Story.get("About").text);Dialog.open();>><</button>> <<button "Quit">><<run Engine.restart()>><</button>></p>
 
-:: Chapter Select [nobr save menu splash start_bgm]
+:: Chapter Select [nobr save menu splash]
 <div class="shaded-box">
     <h2>Select a Chapter to Play!</h2>
     <<listchapters>>
 </div>
 
-:: Chapter Start [menu start_bgm nobr]
+:: Chapter Start [menu nobr]
 <<run Scene.loadScene()>>
 <h2>Now Loading <<= $loaded.current>></h2>
 <h3><<= $chapter.name>></h3>
@@ -62,17 +62,16 @@ As you complete story episodes, check marks will appear next to them on the chap
 <</silently>><</done>>
 
 :: Chapter End [menu]
-<<audio "001" play loop volume 1>>
-<h2>Completed <<= $loaded.current>></h2>
+<<audio ":playing" stop>>\
+<<audio "001" play loop volume 1>>\
+<h2>Completed <<= $chapter.name>></h2>
 
 <<button [[Chapter Select]]>>
-    <<audio ":playing" stop>>
-    <<audio "001" play loop volume 1>>
     <<run Scene.cleanup()>>
     <<run $completed.push($loaded.current)>>
 <</button>>
 
-:: Start [menu splash nobr start_bgm]
+:: Start [menu splash nobr]
 <<audio ":playing" stop>>
 <<audio "001" play loop volume 1>>
 <div class="shaded-box">
