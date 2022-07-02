@@ -49,4 +49,9 @@
         setup.media = clone(data);
     });
 
+    // refresh -> delete game session data
+    $(window).on("unload", () => {
+        SugarCube.session.clear();
+    });
+
 })();

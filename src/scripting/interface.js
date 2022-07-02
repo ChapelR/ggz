@@ -113,12 +113,14 @@
         }
     }
 
-    $(document).on("click", "#vn-box", () => {
+    $(document).on("click", "#vn-box", e => {
+        e.preventDefault();
         activate();
     });
 
     $(document).on("keydown", e => {
         if (e.key === " ") {
+            e.preventDefault();
             activate(true);
         }
     });
