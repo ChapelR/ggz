@@ -1,0 +1,4 @@
+sugarcube-2:
+  macros:
+    listchapters:
+      name: listchapters

@@ -1,0 +1,52 @@
+/* create screen blocker to force landscape orientation; default to hidden */
+#portrait-blocker {
+    z-index: 1000000000;
+    position: fixed;
+    display: none;
+    background-color: #222;
+    padding: 2rem;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#portrait-blocker > div {
+    margin: auto;
+    text-align: center;
+}
+
+@media screen and (orientation: portrait) {
+    #portrait-blocker {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #portrait-blocker {
+        display: block;
+    }
+}
+
+@media screen and (max-height: 460px) {
+    /* smallify text and bigify containers! */
+    #name {
+        padding: 0.2rem;
+        padding-left: 4rem;
+        font-size: 1rem;
+    }
+    #content {
+        padding: 0.5rem 2rem;
+        font-size: 0.8rem;
+        max-width: unset;
+        line-height: 1.5;
+    }
+    #vn-box {
+        max-width: unset;
+        margin: auto;
+    }
+    /* fix drawer bleed-through */
+    #drawer.hidden {
+        top: -17rem;
+    }
+}

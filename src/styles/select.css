@@ -1,0 +1,34 @@
+h2 {
+    text-align: center;
+}
+
+.chapter-select li {
+    list-style: none;
+}
+
+.chapter-select li:first-child a {
+    border-top: 1px solid #888;
+}
+
+.chapter-select li a {
+    display: block;
+    border-bottom: 1px solid #888;
+    width: 400px;
+    text-align: center;
+    margin: auto;
+    padding: 0.2rem;
+}
+
+.chapter-select li a:hover {
+    background-color: #3332;
+}
+
+.chapter-select li a span {
+    color: #fff;
+    font-weight: 800;
+    text-shadow: #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px;
+}
+
+#passage-chapter-start, #passage-chapter-end {
+    text-align: center;
+}

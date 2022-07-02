@@ -1,0 +1,135 @@
+:: StoryData
+{
+    "ifid" : "8AE14086-61D4-4121-AEB8-76F46C96F0FB",
+    "format" : "SugarCube",
+    "format-version" : "2.36.1"
+}
+
+:: StoryTitle 
+GGZ Cutscene Collection
+
+:: About
+''Version 0.1.0 - Alpha Prototype''
+
+This version only includes a few chapters to test out the engine. Hopefully, more chapters will be coming soon.
+
+Made by [[Chapel|https://twinelab.net/]].
+
+Made with [[SugarCube|https://www.motoslave.net/sugarcube/2/]], [[Tweego|https://www.motoslave.net/tweego/]], and [[Twine|https://twinery.org/]]. Data and assets to recreate the cutscenes are from [[the GGZ Cutscene Interpreter project|https://ggz.amaryllisworks.pw]].
+
+''Thank You:''
+* TheMadExile
+* ghostchibi
+
+:: Help
+When in visual novel mode, press the space bar or click on the text window to advance. You can also hold the space bar down to advance rapidly. Use the menu option on the top left to quit or switch to a different chapter. Use the icons on the top left to mute sound and hide text elements.
+
+As you complete story episodes, check marks will appear next to them on the chapter select screen to help you keep track of what you've already seen.
+
+:: StoryDrawer [nobr]
+<h2>Current Cutscene: <span id="current-chapter"><<= $loaded ? $loaded.current : "&hellip;">></span></h2>
+<p><<button [[Chapter Selection|Chapter Select]]>>
+    <<audio ":playing" stop>>
+    <<audio "001" play loop volume 1>>
+    <<run Scene.cleanup()>>
+<</button>></p>
+<p><<button "About">><<run Dialog.setup("About", "about");Dialog.wiki(Story.get("About").text);Dialog.open();>><</button>> <<button "Quit">><<run Engine.restart()>><</button>></p>
+
+:: Chapter Select [nobr save menu splash start_bgm]
+<div class="shaded-box">
+    <h2>Select a Chapter to Play!</h2>
+    <<listchapters>>
+</div>
+
+:: Chapter Start [menu start_bgm nobr]
+<<run Scene.loadScene()>>
+<h2>Now Loading <<= $loaded.current>></h2>
+<h3><<= $chapter.name>></h3>
+<<if $chapter.description>><p><<= $chapter.description>></p><<else>><br><</if>>
+<div id="play-button"><<include "Loader">></div>
+<<done>><<silently>>
+    <<if $scene.loaded>>
+        <<timed 40ms>>
+            <<replace "#play-button">><<include "PlayButton">><</replace>>
+        <</timed>>
+    <<else>>
+        <<run $(document).on(":scene-loaded", () => {
+            setTimeout( () => {
+                $("#play-button").empty().wiki("<<include 'PlayButton'>>");
+            }, 40);
+        })>>
+    <</if>>
+<</silently>><</done>>
+
+:: Chapter End [menu]
+<<audio "001" play loop volume 1>>
+<h2>Completed <<= $loaded.current>></h2>
+
+<<button [[Chapter Select]]>>
+    <<audio ":playing" stop>>
+    <<audio "001" play loop volume 1>>
+    <<run Scene.cleanup()>>
+    <<run $completed.push($loaded.current)>>
+<</button>>
+
+:: Start [menu splash nobr start_bgm]
+<<audio ":playing" stop>>
+<<audio "001" play loop volume 1>>
+<div class="shaded-box">
+    <h2>Welcome!</h2>
+    <p>This project seeks to recreate the story cutscenes from the discontinued (at least outside of Japan and China) mobile game //Guns Girl Z// as a visual-novel-style experience.</p>
+    <p>All of the content, artwork, music, and media presented in this not-for-profit fan work is the exclusive property of MiHoYo/HoYoverse and COGNOSPHERE.</p>
+    <p>Image and text dumps were acquired from this website: [[https://ggz.amaryllisworks.pw]]</p>
+    <p><<button [[Get Started!|Chapter Select]]>><</button>></p>
+    /* <p><<button [[Debug Scene|test scene]]>><<set $loaded to { current : "Debug Scene" }>><</button>></p> */
+</div>
+
+:: Loader [nobr]
+<html><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></html>
+
+:: PlayButton [nobr]
+<<button [[Start!|scene play]]>><<audio ":playing" stop>><</button>>
+
+:: StoryInterface
+<div id="portrait-blocker" data-passage="Portrait Warning"></div>
+<nav>
+    <h1>GGZ &ndash; Cutscene Collection</h2>
+    <a href="#" id="menu" class="menu-icon border-icon"></a>
+    <a href="#" id="sound" class="on"><img src="icons/sound_off.svg"></a>
+    <a href="#" id="text" class="on"><img src="icons/text_hide.svg"></a>
+    <a href="#" id="fullscreen"><img src="icons/fullscreen_on.svg"></a>
+    <a href="#" id="help"><img src="icons/help.svg"></a>
+</nav>
+<div id="drawer" class="hidden" data-passage="StoryDrawer"></div>
+<main id="passages"></main>
+
+:: Portrait Warning [nobr]
+<div>
+    <h2>The screen is too narrow!</h2>
+    <p>If you are on a mobile device, please rotate it to landscape orientation.</p>
+    <p>If you are using a computer, plaease make the window larger!</p>
+</div>
+
+:: test scene [nobr]
+<div id="sprites">
+    <div id="doll-l"><img src="img/kiana/101.png"></div>
+    <div id="doll-r"><img src="img/mei/201.png"></div>
+</div>
+<div id="vn-box">
+    <h2 id="name">Kiana</h2>
+    <<type 15ms none>><p id="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis faucibus tellus. Sed non scelerisque sem, eget maximus neque.</p><</type>>
+</div>
+
+:: scene skeleton [nobr]
+<div id="sprites">
+    <div id="doll-l"><img src="img/missing.png"></div>
+    <div id="doll-r"><img src="img/missing.png"></div>
+</div>
+<div id="vn-box">
+    <h2 id="name"></h2>
+    <p id="content"></p>
+</div>
+
+:: scene play [nobr]
+<<include "scene skeleton">>
+<<done>><<run $scene.play($parts)>><</done>>

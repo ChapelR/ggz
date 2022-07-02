@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2&display=swap');
+
+@font-face {
+    font-family: "zh";
+    src: url("sdk/font/zh-cn.ttf");
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: "Baloo 2", Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    background-color: #333;
+    color: #f5f5f5;
+    text-shadow: 0 0 5px #000;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: background 150ms;
+}
+
+.hide {
+    display: none;
+}
+
+.shaded-box {
+    text-align: center;
+    padding: 1rem;
+    background-color: #3336;
+    max-width: 800px;
+    margin: auto;
+    text-shadow: #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px;
+    border-radius: 8px;
+}
+
+.shaded-box a:hover {
+    text-shadow: #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px;
+}
+
+.shaded-box em {
+    color: #d8a;
+}
+
+a, button, :button {
+    user-select: none;
+    cursor: pointer;
+}
+
+button {
+    border: 0;
+    background: #806;
+    border-radius: 2px 10px;
+    padding: 0.6rem;
+    font-family: "zh", Helvetica, Arial, sans-serif;
+}
+
+button:hover {
+    background: #a28;
+}
+
+a {
+    color: #fad;
+}
+
+p button + button {
+    margin-left: 0.5rem;
+}
+
+a:hover {
+    color: #d8a;
+    text-decoration: none;
+    text-shadow: 0 0 3px #000;
+}
+
+main {
+    max-width: 888px;
+    margin: 3rem auto;
+    padding: 1rem 0;
+    cursor: default;
+}
+
+.passage {
+    line-height: 1.82rem;
+    text-align: justify;
+}
+
+nav {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3rem;
+    background-color: #151515;
+    box-shadow: 0 0 8px #000;
+    cursor: default;
+    user-select: none;
+}
+
+nav h1 {
+    text-align: center;
+    margin: 1rem auto;
+    font-size: 1.25rem;
+}
+
+#menu {
+    z-index: 10000;
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+}
+
+.menu-icon {
+    position: relative;
+    display: inline-block;
+    width: 35px;
+    text-indent: -999px;
+}
+ 
+.border-icon {
+    height: 15px;
+    border-top: 5px solid #fff;
+    border-bottom: 5px solid #fff;
+}
+ 
+.border-icon:before {
+    content: "";
+    position: absolute; 
+    top: 5px;
+    left: 0;
+    width: 100%;
+    border-top: 5px solid #fff;
+}
+
+#sound {
+    position: fixed;
+    top: 0.5rem;
+    width: 2rem;
+    right: 1rem;
+    filter: invert(1);
+}
+
+#sound img {
+    width: 100%;
+}
+
+#sound:hover {
+    filter: invert(0.7);
+}
+
+#text {
+    position: fixed;
+    top: 0.75rem;
+    width: 1.5rem;
+    right: 3.75rem;
+    filter: invert(1);
+}
+
+#text img {
+    width: 100%;
+}
+
+#text:hover {
+    filter: invert(0.7);
+}
+
+#fullscreen {
+    position: fixed;
+    top: 0.9rem;
+    width: 1.25rem;
+    right: 6rem;
+}
+
+#fullscreen img {
+    width: 100%;
+}
+
+#fullscreen:hover {
+    opacity: 0.7;
+}
+
+#help {
+    position: fixed;
+    top: 0.8rem;
+    width: 2rem;
+    right: 7.5rem;
+    filter: invert(1);
+}
+
+#help:hover {
+    filter: invert(0.7);
+}
+
+#drawer {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    box-shadow: 0 0 6px #000;
+    transition: top 300ms ease-in-out;
+    padding: 4rem 2rem 2rem 2rem;
+    height: 12rem;
+    border-radius: 0 0 6px 0;
+}
+
+#drawer.hidden {
+    top: -16rem;
+}
+
+#drawer p {
+    text-align: center;
+}
+
+#ui-dialog {
+    max-width: 600px;
+}
+
+#ui-dialog-titlebar {
+    border-radius: 6px 6px 0 0;
+    border: 1px solid #444;
+    background-color: #111d;
+  }
+
+#ui-dialog-body {
+    border-radius: 0 0 6px 6px;
+    background-color: #111d;
+    border-radius: 0 0 6px 6px;
+    font-size: 1.1rem;
+    padding: 1em 1.5em;
+    text-align: justify;
+}
+
+#ui-dialog-title {
+    text-transform: none;
+    font-weight: normal;
+    padding-top: 0.4rem;
+}
+
+#ui-dialog-close {
+    font-weight: lighter;
+    width: 2em;
+}
+
+#ui-dialog-close:hover {
+    background-color: transparent;
+    border-color: transparent;
+    color: #c33;
+}
