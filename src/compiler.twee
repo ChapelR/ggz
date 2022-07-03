@@ -9,9 +9,9 @@
 GGZ Cutscene Collection
 
 :: About
-''Version 0.1.0 - Alpha Prototype''
+''Version 0.2.0 - Alpha Prototype''
 
-This version only includes a few chapters to test out the engine. Hopefully, more chapters will be coming soon.
+More chapters will be added soon!
 
 Made by [[Chapel|https://twinelab.net/]].
 
@@ -98,6 +98,7 @@ As you complete story episodes, check marks will appear next to them on the chap
 
 :: StoryInterface
 <div id="portrait-blocker" data-passage="Portrait Warning"></div>
+<div id="comic-mode"></div>
 <nav>
     <h1>GGZ &ndash; Cutscene Collection</h2>
     <a href="#" id="menu" class="menu-icon border-icon"></a>

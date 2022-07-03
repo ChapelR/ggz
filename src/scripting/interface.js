@@ -114,7 +114,7 @@
         }
     }
 
-    $(document).on("click", "#vn-box", e => {
+    $(document).on("click", "#vn-box, #comic-mode.active", e => {
         e.preventDefault();
         activate();
     });

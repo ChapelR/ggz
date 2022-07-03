@@ -7,6 +7,8 @@
     const PRELOAD = true; // force users to wait for a synchronous chapter load
     let START = 1;
 
+    const LAUNCH_IN_COMIC_MODE = ["pre0.json", "post0.json"];
+
     function fetchMediaContent (fileName) {
         // prevent undefined, remove need for cloning
         const media = {};
@@ -46,6 +48,11 @@
             this.data = clone(chapterData);
             this.media = fetchMediaContent(chapterData.parts);
             this.loaded = false;
+            this.comicMode = false;
+
+            if (LAUNCH_IN_COMIC_MODE.includes(chapterData.parts)) {
+                this.comicMode = true;
+            }
             
             if (script) {
                 // cloning, not loading
@@ -94,6 +101,19 @@
 
         get description () {
             return this.data.description;
+        }
+
+        // comic mode
+        static activateComicMode () {
+            $("#comic-mode").addClass("active");
+        }
+        
+        static endComicMode () {
+            $("#comic-mode").removeClass("active");
+        }
+
+        static comicModeIsActive () {
+            return $("#comic-mode").hasClass("active");
         }
 
         // apply patches
@@ -254,12 +274,18 @@
         }
 
         play (part = START) {
+            if (part === START && this.comicMode) {
+                Scene.activateComicMode();
+            }
             if (this.seq.includes(part)) {
                 let list = this.instructions(part);
                 this.renderBG(part);
                 this.playAudio(part);
                 this.playInstructionList(list, 0);
             } else {
+                if (Scene.comicModeIsActive()) {
+                    Scene.endComicMode();
+                }
                 SimpleAudio.stop();
                 Engine.play("Chapter End");
             }
@@ -345,6 +371,7 @@
 
     $(document).on(":passagedisplay", () => {
         $(document).off(":vn-advance.vn-mode");
+        Scene.endComicMode();
     });
 
 })();

@@ -1,3 +1,30 @@
+#comic-mode {
+    position: fixed;
+    display: none;
+    background-color: transparent;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#comic-mode.active {
+    display: block;
+    cursor: pointer;
+}
+
+#comic-mode.active::after {
+    content: "\27A4";
+    position: absolute;
+    bottom: 1rem;
+    right: 1.5rem;
+    animation: blink 1.5s ease-in-out infinite;
+}
+
+#comic-mode.active ~ #passages {
+    display: none;
+}
+
 #sprites {
     height: 100%;
     position: fixed;
@@ -84,7 +111,7 @@ img.dim {
     }
 }
 
-#vn-box:after {
+#vn-box::after {
     content: "\27A4";
     position: absolute;
     bottom: 0;
