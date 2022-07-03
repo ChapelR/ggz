@@ -21,10 +21,14 @@
     SimpleAudio.tracks.add("008", "bgm/BGM_008_DIVA.ogg");
     SimpleAudio.tracks.add("011", "bgm/BGM_011_LIGHTING.ogg");
 
+    SimpleAudio.tracks.add("019", "bgm/BGM_019_AMBER.ogg");
+
     SimpleAudio.tracks.add("033", "bgm/BGM_033_DARKEN_1.ogg");
     SimpleAudio.tracks.add("034", "bgm/BGM_034_DARKEN_2.ogg");
     SimpleAudio.tracks.add("035", "bgm/BGM_035_DARKEN_3.ogg");
     SimpleAudio.tracks.add("036", "bgm/BGM_036_DARKEN_4.ogg");
+    
+    SimpleAudio.tracks.add("038", "bgm/BGM_038_ASH.ogg");
     
     SimpleAudio.tracks.add("064", "bgm/BGM_064_CHILDDREAM.ogg");
     SimpleAudio.tracks.add("065", "bgm/BGM_065_NIGHTMARE.ogg");

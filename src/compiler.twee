@@ -109,6 +109,7 @@ As you complete story episodes, check marks will appear next to them on the chap
 </nav>
 <div id="drawer" class="hidden" data-passage="StoryDrawer"></div>
 <main id="passages"></main>
+<div id="curtain"></div>
 
 :: Portrait Warning [nobr]
 <div>

@@ -9,7 +9,7 @@
         },
         {
             name : "Chapter of Memories",
-            episodes : 7
+            episodes : 8
         }
     ];
 

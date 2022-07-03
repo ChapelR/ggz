@@ -24,6 +24,22 @@
         return Array.from({length: parts}, (_, i) => i + START);
     }
 
+    // translation notes
+    const TN_NOTE = /\(TN:(.*)\)/;
+    function parseLineForTN (line) {
+        const match = TN_NOTE.exec(line);
+        if (!match) {
+            return {
+                tn : "",
+                line
+            }
+        }
+        return {
+            tn : match[1],
+            line : line.replace(TN_NOTE, "")
+        }
+    }
+
     // remove/change portraits via a patch
     const portraitPatches = new Map();
     function createPortraitPatch (file, part, side, idxStart, idxEnd, data) {
@@ -212,6 +228,15 @@
             $("#doll-r img").hide().attr("src", "");
         }
 
+        static clearText () {
+            $("#content, #name").empty();
+        }
+
+        static clearAllContent () {
+            Scene.clearPortraits();
+            Scene.clearText();
+        }
+
         static fetchCG (id) {
             return "cg/" + id + ".png";
         }
@@ -231,8 +256,12 @@
         }
 
         static renderMessage (instruction) {
-            const msg = Scene.message(instruction).replace(/\/\/n/g, ' ');
-            return $("#content").empty().wiki("<<type " + TYPING_SPEED + "ms start " + LOCKOUT_TIME + "ms>><html>" + msg + "</html><</type>>");
+            const msg = parseLineForTN(Scene.message(instruction).replace(/\/\/n/g, ' '));
+            if (msg.tn) {
+                // do something with translation notes, eventually...
+                console.log("Translator's Note: " + msg.tn);
+            }
+            return $("#content").empty().wiki("<<type " + TYPING_SPEED + "ms start " + LOCKOUT_TIME + "ms>><html>" + msg.line + "</html><</type>>");
         }
 
         static processInstruction (instruction, idx, instance) {
@@ -273,15 +302,31 @@
             }
         }
 
+        startNextPartMedia (part) {
+            this.renderBG(part);
+            this.playAudio(part);
+            return this;
+        }
+
         play (part = START) {
             if (part === START && this.comicMode) {
                 Scene.activateComicMode();
             }
             if (this.seq.includes(part)) {
                 let list = this.instructions(part);
-                this.renderBG(part);
-                this.playAudio(part);
-                this.playInstructionList(list, 0);
+                if (part !== START) {
+                    Scene.clearAllContent();
+                    setup.curtain(() => {
+                        // curtain midpoint callback
+                        this.startNextPartMedia(part)
+                    }, () => {
+                        // callback to continue playback after the curtain.
+                        this.playInstructionList(list, 0);
+                    });
+                } else {
+                    this.startNextPartMedia(part)
+                        .playInstructionList(list, 0);
+                }
             } else {
                 if (Scene.comicModeIsActive()) {
                     Scene.endComicMode();

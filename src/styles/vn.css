@@ -64,7 +64,7 @@ img.dim {
     bottom: 1rem;
     left: 2rem;
     right: 2rem;
-    height: 12rem;
+    height: 12.5rem;
     max-height: 90%;
     background-color: #fafafaea;
     color: #151515;
@@ -130,4 +130,20 @@ img.dim {
 
 .macro-type-cursor:after {
 	content: '';
+}
+
+#curtain {
+    z-index: 100;
+    position: fixed;
+    background-color: #111;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    transition: height 500ms ease-in-out;
+}
+
+#curtain.closed {
+    display: block;
+    height: 110vh;
 }

@@ -3,8 +3,22 @@
 
     window.TYPING = false;
     window.RECLICK_LOCK = false;
+    const CURTAIN_TIMERS = [500, 500]; // transition (from css) and wait time
 
     const SPLASH_SCREENS = 6; // 0-based, so less one
+
+    // curtain
+    const $curtain = $("#curtain");
+    setup.curtain = function curtain (mid, end) {
+        $curtain.addClass("closed");
+        setTimeout( () => {
+            mid && mid();
+            $curtain.removeClass("closed");
+            setTimeout( () => {
+                end && end();
+            }, CURTAIN_TIMERS[0]);
+        }, CURTAIN_TIMERS[0] + CURTAIN_TIMERS[1]);
+    };
 
     setup.typeSkip = function typeSkip () {
         // activate the "skip key" to skip typing animations
