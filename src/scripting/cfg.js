@@ -44,6 +44,21 @@
     });
     readJSONwLoadScreen("chapters.json", data => {
         setup.chapters = clone(data);
+        // patch in prologue "comics"
+        setup.chapters.story.main[0].episodes = [
+            {
+                "name": "Prologue Part 1",
+                "parts": "pre0.json"
+            },
+            {
+                "name": "Prologue Part 2",
+                "parts": "prologue.json"
+            },
+            {
+                "name": "Prologue Part 3",
+                "parts": "post0.json"
+            }
+        ];
     });
     readJSONwLoadScreen("data/media.json", data => {
         setup.media = clone(data);

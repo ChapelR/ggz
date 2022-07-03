@@ -83,7 +83,7 @@ As you complete story episodes, check marks will appear next to them on the chap
 <<audio "001" play loop volume 1>>
 <div class="shaded-box">
     <h2>Welcome!</h2>
-    <p>This project seeks to recreate the story cutscenes from the discontinued (at least outside of Japan and China) mobile game //Guns Girl Z// as a visual-novel-style experience.</p>
+    <p>This project seeks to recreate the story cutscenes from the discontinued (at least outside of Japan and China) mobile game //Guns Girl Z// as a visual novel-style experience.</p>
     <p>All of the content, artwork, music, and media presented in this not-for-profit fan work is the exclusive property of MiHoYo/HoYoverse and COGNOSPHERE.</p>
     <p>Image and text dumps were acquired from the [[GGZ cutscene interpreter|https://ggz.amaryllisworks.pw]]. Thank you to the [[Hoyostans|https://hoyostans.be/]] community, including Mister Spaceman, Demonbanex, Bun Bun, Max, Darkmiz, and others for their work on the retranslation.</p>
     <p><<button [[Get Started!|Chapter Select]]>><</button>></p>

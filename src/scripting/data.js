@@ -5,11 +5,11 @@
     const CHAPTER_LIST = [
         {
             name : "Prologue",
-            episodes : 1
+            episodes : 3
         },
         {
             name : "Chapter of Memories",
-            episodes : 4
+            episodes : 7
         }
     ];
 

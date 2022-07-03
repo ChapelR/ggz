@@ -49,6 +49,8 @@ img.dim {
     box-shadow: 0 0 4px #000;
     user-select: none;
     max-height: 35%;
+    /* just in case */
+    overflow: auto; 
 }
 
 #name {

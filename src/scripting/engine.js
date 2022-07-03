@@ -22,6 +22,22 @@
         return Array.from({length: parts}, (_, i) => i + START);
     }
 
+    // remove/change portraits via a patch
+    const portraitPatches = new Map();
+    function createPortraitPatch (file, part, side, idxStart, idxEnd, data) {
+        // i should probably allow an array of patches...but meh
+        portraitPatches.set(file, {
+            part,
+            side, // right/left
+            start : idxStart,
+            end : idxEnd,
+            data
+        });
+    };
+
+    // remove corrupted mei from chapter 4
+    createPortraitPatch("type-1-1-chapter-6-15.json", 15, "right", 55, Infinity, ["", 0, false]);
+
     class Scene {
         constructor (chapterData, script, seq) {
 
@@ -78,6 +94,11 @@
 
         get description () {
             return this.data.description;
+        }
+
+        // apply patches
+        get patchesForPortraits () {
+            return portraitPatches.has(this.data.parts) ? portraitPatches.get(this.data.parts) : null;
         }
 
         // retrieve part instructions
@@ -138,9 +159,22 @@
             return $("#name").empty().show().wiki(speaker || "");
         }
 
-        static renderPortraits (instruction) {
-            const left = instruction[1];
-            const right = instruction[2];
+        static renderPortraits (instruction, idx, instance) {
+            // read instructions
+            let left = instruction[1];
+            let right = instruction[2];
+
+            // patch data (gross code, don't look!)
+            const patch = instance.patchesForPortraits;
+            if (patch && State.variables.part === patch.part && idx >= patch.start && idx <= patch.end) {
+                if (patch.side === "right") {
+                    right = clone(patch.data);
+                } else {
+                    left = clone(patch.data);
+                }
+            }
+
+            // render
             if (!left[0]) {
                 $("#doll-l img").hide().attr("src", "");
             } else {
@@ -181,21 +215,21 @@
             return $("#content").empty().wiki("<<type " + TYPING_SPEED + "ms start " + LOCKOUT_TIME + "ms>><html>" + msg + "</html><</type>>");
         }
 
-        static processInstruction (instruction) {
+        static processInstruction (instruction, idx, instance) {
             switch (instruction[0]) {
                 case "speaker":
-                    Scene.renderSpeaker(instruction);
+                    Scene.renderSpeaker(instruction, idx);
                     return false;
                 case "portraits":
-                    Scene.renderPortraits(instruction);
+                    Scene.renderPortraits(instruction, idx, instance);
                     return false;
                 case "bg":
-                    Scene.renderCG(instruction);
+                    Scene.renderCG(instruction, idx);
                     TYPING = false;
                     return true;
                 case "msg":
                 default:
-                    Scene.renderMessage(instruction);
+                    Scene.renderMessage(instruction, idx);
                     return true; // wait for user to advance
             }
         }
@@ -208,7 +242,7 @@
                 return;
             }
             let ins = clone(list[idx]);
-            let wait = Scene.processInstruction(ins);
+            let wait = Scene.processInstruction(ins, idx, this);
             idx ++;
             if (wait) {
                 $(document).one(":vn-advance.vn-mode", () => {
@@ -273,6 +307,9 @@
         }
 
         getBGList () {
+            if (!this.media.bg) {
+                return [];
+            }
             return this.media.bg.filter( img => {
                 return !!img;
             });
