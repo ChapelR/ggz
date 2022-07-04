@@ -5,7 +5,7 @@
   "main": "build.js",
   "scripts": {
     "build": "node build.js && tweego --head temp/head.html -o dist/index.html twee",
-    "lint": 
+    "lint": "jshint src/scripting"
   },
   "repository": {
     "type": "git",
