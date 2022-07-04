@@ -25,19 +25,14 @@
     }
 
     // translation notes
-    const TN_NOTE = /\(TN:(.*)\)/;
+    const TN_NOTE = /\([T|J|C][P|N]:(.*)\)/; // (TN:...), (CN:...), (JP:...)
     function parseLineForTN (line) {
         const match = TN_NOTE.exec(line);
         if (!match) {
-            return {
-                tn : "",
-                line
-            }
+            return { tn : "", line };
         }
-        return {
-            tn : match[1],
-            line : line.replace(TN_NOTE, "")
-        }
+        // remove notes from line
+        return { tn : match[1], line : line.replace(TN_NOTE, "") };
     }
 
     // remove/change portraits via a patch
@@ -88,7 +83,7 @@
                             $(document).trigger(":scene-loaded");
                         });
                     } else {
-                        self.preload(); // start loading assets
+                        self.preload(); // start loading assets asynchronously
                         self.loaded = true;
                         $(document).trigger(":scene-loaded"); // show start button
                     }
