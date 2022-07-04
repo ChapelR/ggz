@@ -72,10 +72,10 @@
                 this.loaded = true;
             } else {
                 // first time load!
-                readJSON("data/" + chapterData.parts, data => {
-                    const script = clone(data);
-                    self.script = script;
-                    self.seq = processScript(script);
+                if (Story.has(chapterData.parts)) {
+                    // load and parse passage script
+                    this.script = clone(setup.parse(chapterData.parts));
+                    this.seq = processScript(this.script);
                     State.variables.part = START;
                     if (PRELOAD) { // force preloading of assets?
                         self.preload(() => {
@@ -87,7 +87,24 @@
                         self.loaded = true;
                         $(document).trigger(":scene-loaded"); // show start button
                     }
-                });
+                } else {
+                    readJSON("data/" + chapterData.parts, data => {
+                        const script = clone(data);
+                        self.script = script;
+                        self.seq = processScript(script);
+                        State.variables.part = START;
+                        if (PRELOAD) { // force preloading of assets?
+                            self.preload(() => {
+                                self.loaded = true;
+                                $(document).trigger(":scene-loaded");
+                            });
+                        } else {
+                            self.preload(); // start loading assets asynchronously
+                            self.loaded = true;
+                            $(document).trigger(":scene-loaded"); // show start button
+                        }
+                    });
+                }
             }
 
         }

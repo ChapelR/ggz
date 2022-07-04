@@ -1,8 +1,9 @@
-<!-- # Version 0.2.1
+# Version 0.2.1
 
 ## Technical
 - Added `(CN:...)` and `(JP:...)` to recognized syntax for translator's notes.
- -->
+- Added script custom parsing. Will probably fork this into a separate VN engine eventually.
+
 # Version 0.2.0
 
 ## Technical
