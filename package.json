@@ -1,0 +1,24 @@
+{
+  "name": "ggz",
+  "version": "0.2.1",
+  "description": "A VN-engine for GGZ cutscenes.",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js && tweego --head temp/head.html -o dist/index.html twee"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChapelR/ggz.git"
+  },
+  "author": "Chapel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ChapelR/ggz/issues"
+  },
+  "homepage": "https://github.com/ChapelR/ggz#readme",
+  "dependencies": {
+    "clean-css": "^5.3.0",
+    "fs-jetpack": "^4.3.1",
+    "terser": "^5.14.1"
+  }
+}

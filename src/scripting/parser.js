@@ -19,7 +19,7 @@
     // };
 
     function retrieveData (psg) {
-        return Story.get(passageName).text;
+        return Story.get(psg).text;
     }
 
     function parseBlocks (data) {
