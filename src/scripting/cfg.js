@@ -26,9 +26,9 @@
             if (rawFile.readyState === 4 && rawFile.status == "200") {
                 callback(rawFile.response);
             }
-        }
+        };
         rawFile.send(null);
-    }
+    };
 
     function readJSONwLoadScreen (file, cb) {
         const lock = LoadScreen.lock();

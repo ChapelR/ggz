@@ -1,3 +1,5 @@
+// jshint esversion: 6, browser: true
+
 (() => {
     // image preload
     "use strict";
@@ -16,7 +18,9 @@
             preloadImage( url, function () {
                 loaded++;
                 if (loaded === toBeLoaded) {
+                    /* jshint ignore:start */
                     cb && cb();
+                    /* jshint ignore:end */
                 }
             });
         });

@@ -4,7 +4,7 @@
 
     let locale = 3; // human translated english by default
 
-    function returnLocalVersion (array = [""], override) {
+    function returnLocalVersion (array, override) {
         if (!array || !(array instanceof Array) || !array.length) {
             return "";
         }
@@ -19,7 +19,7 @@
         if (typeof id !== "number") {
             id = Number(id);
         }
-        return returnLocalVersion(setup.database.speakers[String(id)])
+        return returnLocalVersion(setup.database.speakers[String(id)]);
     }
 
     function getImageForScene (id, idx = 0) {
@@ -68,13 +68,13 @@
     window.Data = {
         speaker : getSpeakerName,
         image : getImageForScene
-    }
+    };
 
     window.Render = {
         image : {
             right : renderRightSide, // id, idx, dim, boost
             left : renderLeftSide // id, idx, dim
         }
-    }
+    };
 
 })();

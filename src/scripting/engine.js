@@ -46,7 +46,7 @@
             end : idxEnd,
             data
         });
-    };
+    }
 
     // remove corrupted mei from chapter 4
     createPortraitPatch("type-1-1-chapter-6-15.json", 15, "right", 55, Infinity, ["", 0, false]);
@@ -330,7 +330,7 @@
                     Scene.clearAllContent();
                     setup.curtain(() => {
                         // curtain midpoint callback
-                        this.startNextPartMedia(part)
+                        this.startNextPartMedia(part);
                     }, () => {
                         // callback to continue playback after the curtain.
                         this.playInstructionList(list, 0);

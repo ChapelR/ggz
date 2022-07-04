@@ -1,0 +1,13 @@
+{
+    "esversion": 6,
+    "browser": true,
+    "globals": {
+      "Save": true,
+      "Config": true,
+      "State": true,
+      "SimpleAudio": true,
+      "setup": true,
+      "LoadScreen": true,
+      "$": true
+    }
+  }

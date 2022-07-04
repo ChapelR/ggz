@@ -51,16 +51,18 @@
                 const $li = createLi().append($a);
                 $ul.append($li);
 
+                /* jshint ignore:start */
                 $a.ariaClick({ label : "Play this chapter!" }, function () {
                     const $self = $(this);
                     const loaded = State.variables.loaded = {
                         current : $self.attr("data-current"),
                         chapter : Number($self.attr("data-ch")),
                         episode : Number($self.attr("data-ep"))
-                    }
+                    };
                     loadChapter(loaded.chapter, loaded.episode);
-                    Engine.play("Chapter Start")
+                    Engine.play("Chapter Start");
                 });
+                /* jshint ignore:end */
             }
         });
         return $ul;

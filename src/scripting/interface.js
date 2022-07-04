@@ -12,10 +12,14 @@
     setup.curtain = function curtain (mid, end) {
         $curtain.addClass("closed");
         setTimeout( () => {
+            /* jshint ignore:start */
             mid && mid();
+            /* jshint ignore:end */
             $curtain.removeClass("closed");
             setTimeout( () => {
+                /* jshint ignore:start */
                 end && end();
+                /* jshint ignore:end */
             }, CURTAIN_TIMERS[0]);
         }, CURTAIN_TIMERS[0] + CURTAIN_TIMERS[1]);
     };
@@ -112,7 +116,7 @@
         // lockout clicks for a split second
         setTimeout( () => {
             RECLICK_LOCK = false;
-        }, LOCKOUT_TIME)
+        }, LOCKOUT_TIME);
         if (RECLICK_LOCK) {
             return;
         }
