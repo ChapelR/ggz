@@ -5,7 +5,7 @@
 - Added script custom parsing. Will probably fork this into a separate VN engine eventually.
 
 ## Meta
-- Improved build process.
+- Improved build process and added code compression.
 
 # Version 0.2.0
 
