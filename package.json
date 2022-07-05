@@ -5,7 +5,8 @@
   "main": "build.js",
   "scripts": {
     "build": "node build.js && tweego --head temp/head.html -o dist/index.html twee",
-    "lint": "jshint src/scripting"
+    "lint": "jshint src/scripting",
+    "serve": "cd dist && http-server -c0 -o"
   },
   "repository": {
     "type": "git",
@@ -16,13 +17,14 @@
   "bugs": {
     "url": "https://github.com/ChapelR/ggz/issues"
   },
-  "homepage": "https://github.com/ChapelR/ggz#readme",
-  "dependencies": {
+  "homepage": "https://chapel.itch.io/ggz",
+  "dependencies": {},
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "jshint": "^2.13.4",
     "clean-css": "^5.3.0",
     "fs-jetpack": "^4.3.1",
     "terser": "^5.14.1"
   },
-  "devDependencies": {
-    "jshint": "^2.13.4"
-  }
+  "private": true
 }
