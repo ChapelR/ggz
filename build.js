@@ -8,11 +8,12 @@ const jsOptions = {};
 
 const files = {
     js : [
-        "assets.js",
+        "preload.js",
         "audio.js",
         "cfg.js",
-        "data-lookup.js",
-        "data.js",
+        "files.js",
+        "database.js",
+        "load-chapter.js",
         "parser.js",
         "engine.js",
         "interface.js"

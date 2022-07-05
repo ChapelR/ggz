@@ -26,11 +26,6 @@
         });
     }
 
-    function screenLoad (urls) {
-        const lock = LoadScreen.lock();
-        preloadAll(urls, () => { LoadScreen.unlock(lock); });
-    }
-
     setup.preload = preloadAll;
     
 })();
