@@ -359,7 +359,7 @@
                 images.push(portIns[2]);
             });
             return images.filter( img => {
-                return img[0] !== "";
+                return img && img[0] !== "";
             });
         }
 

@@ -8,15 +8,15 @@
     const PORTRAIT_DATA = /\[(.*?)\]\s*\[(.*?)\]/;
 
     // use a nav override to load a passage nav'd to as a scene
-    // Config.navigation.override = function (passage) {
-    //     // passages tagged "scene" are VN scripts
-    //     if (tags(passage).includes("scene")) {
-    //         // SOMEHOW load the scene (TODO)
-            
-    //         // nav to scene start
-    //         Engine.play("Chapter Start");
-    //     }
-    // };
+    Config.navigation.override = function (dest) {
+        // passages tagged "scene" are VN scripts
+        if (tags(dest).includes("scene")) {
+            // load the scene
+            State.variables.chapter = { parts : dest };
+            // return the loading passage
+            return "Loading Passage";
+        }
+    };
 
     function retrieveData (psg) {
         return Story.get(psg).text;
@@ -98,6 +98,12 @@
         return str === "\"\"";
     }
 
+    function stripBrackets (str) {
+        return str
+            .replace("[", "")
+            .replace("]", "");
+    }
+
     function processPortData (arr) {
         let id = arr[0];
         let idx = processNumber(arr[1]);
@@ -120,9 +126,9 @@
         if (!right) {
             right = "[\"\", 0, false]";
         }
-        left = left.split(",")
+        left = stripBrackets(left).split(",")
             .map( part => { return part.trim(); });
-        right = right.split(",")
+        right = stripBrackets(right).split(",")
             .map( part => { return part.trim(); });
         
         return [ processPortData(left), processPortData(right) ];
@@ -140,7 +146,7 @@
                 return ["speaker", processNumber(command.data)];
             case "portraits":
                 // portraits command
-                return ["portraits", portraitData(command.data) ];
+                return ["portraits"].concat(portraitData(command.data));
             case "msg":
             case "":
                 // msg command

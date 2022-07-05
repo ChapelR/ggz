@@ -55,7 +55,7 @@ As you complete story episodes, check marks will appear next to them on the chap
 <<if $chapter.description>><p><<= $chapter.description>></p><<else>><br><</if>>
 <div id="play-button"><<include "Loader">></div>
 <<done>><<silently>>
-    <<if $scene.loaded>>
+    <<if $scene && $scene.loaded>>
         <<timed 40ms>>
             <<replace "#play-button">><<include "PlayButton">><</replace>>
         <</timed>>
@@ -117,6 +117,25 @@ As you complete story episodes, check marks will appear next to them on the chap
     <p>If you are on a mobile device, please rotate it to landscape orientation.</p>
     <p>If you are using a computer, please make the window larger!</p>
 </div>
+
+:: Loading Passage [nobr]
+<<run Scene.loadScene()>>
+<h2>Now Loading&hellip;</h2>
+<br><br>
+<div id="play-button"><<include "Loader">></div>
+<<done>><<silently>>
+    <<if $scene && $scene.loaded>>
+        <<timed 40ms>>
+            <<replace "#play-button">><<include "PlayButton">><</replace>>
+        <</timed>>
+    <<else>>
+        <<run $(document).on(":scene-loaded", () => {
+            setTimeout( () => {
+                $("#play-button").empty().wiki("<<include 'PlayButton'>>");
+            }, 40);
+        })>>
+    <</if>>
+<</silently>><</done>>
 
 :: test scene [nobr]
 <div id="sprites">

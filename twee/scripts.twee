@@ -1,0 +1,10 @@
+:: test script [scene]
+speaker> 0
+portraits> [] []
+> It was a cold and windy night...
+speaker> 204553
+portraits> [101, 0, false] []
+> Mei-senpai! What are we even doing out here? It's freezing!
+speaker> 204554
+portraits> [101, 0, true] [203, 0, false]
+> I told you to bring a coat, Kiana-chan.
