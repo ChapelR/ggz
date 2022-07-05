@@ -118,7 +118,7 @@ As you complete story episodes, check marks will appear next to them on the chap
     <p>If you are using a computer, please make the window larger!</p>
 </div>
 
-:: Loading Passage [nobr]
+:: Loading Passage [menu nobr]
 <<run Scene.loadScene()>>
 <h2>Now Loading&hellip;</h2>
 <br><br>

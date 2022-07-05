@@ -45,14 +45,13 @@ function compileJS () {
         return jetpack.read(`${jsPath}${fileName}`);
     }).join("\n\n");
 
-    // Terser.minify(js, jsOptions).then(result => {
-    //     if (result.error) {
-    //         console.error(result.error);
-    //     }
+    Terser.minify(js, jsOptions).then(result => {
+        if (result.error) {
+            console.error(result.error);
+        }
     
-    //     jetpack.write(`${outputPath}build.js`, result.code, { atomic : true });
-    // });
-    jetpack.write(`${outputPath}build.js`, js, { atomic : true });
+        jetpack.write(`${outputPath}build.js`, result.code, { atomic : true });
+    });
 }
 
 // run

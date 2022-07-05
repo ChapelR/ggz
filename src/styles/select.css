@@ -29,6 +29,6 @@ h2 {
     text-shadow: #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px, #000 0px 0px 3px;
 }
 
-#passage-chapter-start, #passage-chapter-end {
+#passage-chapter-start, #passage-chapter-end, #passage-loading-passage {
     text-align: center;
 }
