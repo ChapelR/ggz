@@ -1,6 +1,7 @@
-# Version 0.2.1
+# Version 0.3.0
 
 ## Technical
+- Rewrote and reimplemented sprite parsing. The engine now supports any number of sprites, which can be assigned to one of five positions. Sprites now transition more smoothly between indexed image sources using crossfades, quickly fade out when removed from the scene, smoothly transition in and out of dimmed mode, and can be smoothly translated across the screen to different positions.
 - Added `(CN:...)` and `(JP:...)` to recognized syntax for translator's notes.
 - Added script custom parsing. Will probably fork this into a separate VN engine eventually.
 

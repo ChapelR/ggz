@@ -5,7 +5,12 @@
     const PART_MARKER = /#+/g;
     const DIRECTIVE_MARKER = /(.*)>(.*)/;
     const NEW_LINE = /\n+/;
-    const PORTRAIT_DATA = /\[(.*?)\]\s*\[(.*?)\]/;
+    const PORTRAIT_SEP = /\]\s*?\[/g; // split portrait data
+
+    function ex (err, msg) {
+        console.error(err.message);
+        throw new Error(msg);
+    }
 
     // use a nav override to load a passage nav'd to as a scene
     Config.navigation.override = function (dest) {
@@ -104,35 +109,73 @@
             .replace("]", "");
     }
 
-    function processPortData (arr) {
+    // function processPortData (arr) {
+    //     let id = arr[0];
+    //     let idx = processNumber(arr[1]);
+    //     let dim = processBoolean(arr[2]);
+    //     let pos = processString(arr[3]);
+    //     if (isQuotes(id)) {
+    //         id = "";
+    //     } else {
+    //         id = processNumber(id);
+    //     }
+    //     return [id, idx, dim];
+    // }
+
+    // function portraitData (data) {
+    //     const matches = PORTRAIT_DATA.exec(data);
+    //     let left = matches[1].trim();
+    //     let right = matches[2].trim();
+    //     if (!left) {
+    //         left = "[\"\", 0, false]";
+    //     }
+    //     if (!right) {
+    //         right = "[\"\", 0, false]";
+    //     }
+    //     left = stripBrackets(left).split(",")
+    //         .map( part => { return part.trim(); });
+    //     right = stripBrackets(right).split(",")
+    //         .map( part => { return part.trim(); });
+        
+    //     return [ processPortData(left), processPortData(right) ];
+        
+    // }
+
+    function processPortParts (arr) {
         let id = arr[0];
         let idx = processNumber(arr[1]);
         let dim = processBoolean(arr[2]);
+        let pos = arr[3] ? processString(arr[3]).replace(/\"/g, "") : null;
         if (isQuotes(id)) {
             id = "";
         } else {
             id = processNumber(id);
         }
-        return [id, idx, dim];
+        const ret = [id, idx, dim];
+        if (pos) {
+            ret.push(pos);
+        }
+        return ret;
     }
 
     function portraitData (data) {
-        const matches = PORTRAIT_DATA.exec(data);
-        let left = matches[1].trim();
-        let right = matches[2].trim();
-        if (!left) {
-            left = "[\"\", 0, false]";
+        try {
+            return data
+                .split(PORTRAIT_SEP)
+                .map( p => {
+                    if (!p || !p.trim()) {
+                        return ["", 0, false];
+                    }
+                    p = p.trim().replace("[", "").replace("]", "").trim();
+                    if (!p || !p.trim()) {
+                        return ["", 0, false];
+                    }
+                    let array = p.split(",").map( part => { return part.trim(); });
+                    return processPortParts(array);
+                });
+        } catch (err) {
+            ex(err, "Could not process portrait data: " + data);
         }
-        if (!right) {
-            right = "[\"\", 0, false]";
-        }
-        left = stripBrackets(left).split(",")
-            .map( part => { return part.trim(); });
-        right = stripBrackets(right).split(",")
-            .map( part => { return part.trim(); });
-        
-        return [ processPortData(left), processPortData(right) ];
-        
     }
 
     function processDirectiveData (command) {
@@ -153,25 +196,28 @@
                 return ["msg", 0, processString(command.data)];
             default:
                 // bad command
-                console.error("Bad command:", command);
-                return null;
+                ex({ message : "Could not process directives." }, "Could not process directives.");
         }
     }
 
     function parse (psg) {
-        const data = retrieveData(psg);
-        const ret = {}; // package up
-        parseBlocks(data).forEach( (part, idx) => {
-            let seqNum = String(idx + 1); // "1", "2", "3", etc
-            let script = [];
+        try {
+            const data = retrieveData(psg);
+            const ret = {}; // package up
+            parseBlocks(data).forEach( (part, idx) => {
+                let seqNum = String(idx + 1); // "1", "2", "3", etc
+                let script = [];
 
-            splitLines(part).forEach( line => {
-                script.push(processDirectiveData(readLine(line)));
+                splitLines(part).forEach( line => {
+                    script.push(processDirectiveData(readLine(line)));
+                });
+
+                ret[seqNum] = script;
             });
-
-            ret[seqNum] = script;
-        });
-        return ret;
+            return ret;
+        } catch (err) {
+            ex(err, "Error in script parsing.");
+        }
     }
 
     setup.parse = parse;

@@ -3,8 +3,30 @@ speaker> 0
 portraits> [] []
 > It was a cold and windy night...
 speaker> 204553
-portraits> [101, 0, false] []
+portraits> [101, 0, false, center] []
 > Mei-senpai! What are we even doing out here? It's freezing!
 speaker> 204554
-portraits> [101, 0, true] [203, 0, false]
+portraits> [101, 0, true, center-left] [203, 0, false, center-right]
 > I told you to bring a coat, Kiana-chan.
+> You should really think more about&hellip; Why are you looking at me like that?
+speaker> 204553
+portraits> [101, 0, false, center] [203, 0, true, center-right]
+> I can think of a way we can stay warm&hellip;
+speaker> 204554
+portraits> [101, 0, true, center] [203, 0, false, right]
+> W&ndash;wait! What are you doing?!
+speaker> 204553
+portraits> [101, 0,false , center-right] [203, 0, true, right]
+> Here I come!!!! Keep me warm, Mei-senpai~!
+speaker> 0
+portraits> [101, 0, false, center-right] [203, 0, false, center-left]
+> Kiana lunges at Mei, but Mei deftly avoids her.
+speaker> 204554
+portraits> [101, 0, true, center-right] [203, 0, false, center-left]
+> Please stop horsing around, Kiana.
+speaker> 204553
+portraits> [101, 0, false, right] [203, 0, true, center-left]
+> Hmmph! Fine! See if I care. We can both just freeze then.
+speaker> 0
+portraits> [101, 0, false, right] [203, 0, false, center-left]
+> Kiana continues sulking&hellip;

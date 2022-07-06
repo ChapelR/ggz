@@ -212,23 +212,41 @@
             let left = instruction[1];
             let right = instruction[2];
 
-            // patch data (gross code, don't look!)
-            const patch = instance.patchesForPortraits;
-            if (patch && State.variables.part === patch.part && idx >= patch.start && idx <= patch.end) {
-                if (patch.side === "right") {
-                    right = clone(patch.data);
-                } else {
-                    left = clone(patch.data);
+            // startup render process
+            Render.init();
+
+            // process "new" style code
+            if (setup.isValidPosition(left[3])) {
+                // this portrait instruction has positional data!
+                const portraits = clone(instruction);
+                portraits.deleteAt(0);
+                portraits.forEach( port => {
+                    if (setup.isValidPosition(port[3]) && port[0] !== "") {
+                        Render.sprite(port[3], port[0], port[1], port[2]);
+                    }
+                });
+            } else {
+                // patch data (gross code, don't look!)
+                const patch = instance.patchesForPortraits;
+                if (patch && State.variables.part === patch.part && idx >= patch.start && idx <= patch.end) {
+                    if (patch.side === "right") {
+                        right = clone(patch.data);
+                    } else {
+                        left = clone(patch.data);
+                    }
+                }
+
+                // render
+                if (left[0]) {
+                    Render.sprite("center-left", left[0], left[1], left[2]);
+                }
+                if (right[0]) {
+                    Render.sprite("center-right", right[0], right[1], right[2]);
                 }
             }
 
-            // render
-            if (left[0]) {
-                Render.sprite("center-left", left[0], left[1], left[2]);
-            }
-            if (right[0]) {
-                Render.sprite("center-right", right[0], right[1], right[2]);
-            }
+            // complete render process by clearing expired sprite containers
+            Render.clearExpired();
         }
 
         static clearSprites () {

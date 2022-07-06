@@ -1,7 +1,7 @@
 (() => {
     "use strict";
 
-    const allPositions = ["p0", "p1", "p2", "p3", "p4"];
+    setup.allPositions = ["p0", "p1", "p2", "p3", "p4"];
 
     const spritePositions = {
         "left" : "p0",
@@ -11,7 +11,13 @@
         "right": "p4"
     };
 
+    const positionNames = Object.keys(spritePositions);
+
     const ANIMATION_TIME = 200; // in ms
+
+    setup.isValidPosition = function isValidPosition (pos) {
+        return pos && typeof pos === "string" && positionNames.includes(pos);
+    };
 
     function getPositionClass (name, img) {
         const cls = spritePositions[name];
@@ -19,7 +25,7 @@
             const $img = (img instanceof $) ? img : $(img);
             if (!$img.hasClass(cls)) {
                 $img
-                    .removeClass(allPositions)
+                    .removeClass(setup.allPositions)
                     .addClass(cls);
             }
         }
@@ -28,7 +34,7 @@
 
     function getSpriteElement (id) {
         // retrieve img element based on sprite id
-        const $img = $("#sprite").find("img[data-id='" + String(id) + "']");
+        const $img = $("#sprites").find("img[data-id='" + String(id) + "']");
         return $img[0] ? $img : null;
     }
 
@@ -58,6 +64,16 @@
         }, Engine.minDomActionDelay || 50);
     }
 
+    function initRenderProcess () {
+        // start up render process, by marking existing sprites as expired
+        $("#sprites img").each( function () {
+            const $self = $(this);
+            if (!$self.hasClass("rendering")) {
+                $self.addClass("expired");
+            }
+        });
+    }
+
     function renderSprite (position, id, idx, dim, classList = []) {
         const path = Data.image(id, idx);
         let $img = null;
@@ -65,14 +81,6 @@
         $(document).trigger({
             type : ":sprite-render-start",
             sprite : { id, idx, dim, classList, path }
-        });
-
-        // first, mark old sprites
-        $("#sprites img").each( function () {
-            const $self = $(this);
-            if (!$self.hasClass("rendering")) {
-                $self.addClass("expired");
-            }
         });
 
         // first, attempt to reuse an image element if possible:
@@ -91,7 +99,7 @@
                 });
             }
         } else {
-            // create new image container, and fade it in.
+            // create new image container
             $img = $(document.createElement("img"))
                 .attr({
                     "src" : "img/" + path,
@@ -101,9 +109,6 @@
                 .addClass("rendering")
                 .appendTo("#sprites");
         }
-
-        // cleanup old sprites; should essentially crossfade
-        clearMarkedSprites();
 
         // set positional class on image
         getPositionClass(position, $img);
@@ -129,8 +134,10 @@
     }
 
     window.Render = {
+        init : initRenderProcess,
         sprite : renderSprite,
-        clear : clearSprites
+        clear : clearSprites,
+        clearExpired : clearMarkedSprites
     };
 
 
