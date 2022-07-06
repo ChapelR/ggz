@@ -36,7 +36,7 @@
         if (!!dim) {
             classList.push("dim");
         }
-        if (id == 3) { // alwasy boost corrupted mei
+        if (id == 3 && !classList.includes("boost")) { // always "boost" corrupted mei
             classList.push("boost");
         }
         if (classList.length) {
@@ -45,34 +45,34 @@
         $("#sprites").append($img);
     }
 
-    function renderLeftSide (id, idx, dim = false) {
-        const path = Data.image(id, idx);
-        const $doll = $("#doll-l img");
-        $doll.attr("src", "img/" + path);
-        if (dim) {
-            $doll.addClass("dim");
-        } else {
-            $doll.removeClass("dim");
-        }
-        return $doll.show();
-    }
+    // function renderLeftSide (id, idx, dim = false) {
+    //     const path = Data.image(id, idx);
+    //     const $doll = $("#doll-l img");
+    //     $doll.attr("src", "img/" + path);
+    //     if (dim) {
+    //         $doll.addClass("dim");
+    //     } else {
+    //         $doll.removeClass("dim");
+    //     }
+    //     return $doll.show();
+    // }
 
-    function renderRightSide (id, idx, dim = false, boost = false) {
-        const path = Data.image(id, idx);
-        const $doll = $("#doll-r img");
-        $doll.attr("src", "img/" + path);
-        if (dim) {
-            $doll.addClass("dim");
-        } else {
-            $doll.removeClass("dim");
-        }
-        if (boost || id == 3) {
-            $doll.addClass("boost");
-        } else {
-            $doll.removeClass("boost");
-        }
-        return $doll.show();
-    }
+    // function renderRightSide (id, idx, dim = false, boost = false) {
+    //     const path = Data.image(id, idx);
+    //     const $doll = $("#doll-r img");
+    //     $doll.attr("src", "img/" + path);
+    //     if (dim) {
+    //         $doll.addClass("dim");
+    //     } else {
+    //         $doll.removeClass("dim");
+    //     }
+    //     if (boost || id == 3) {
+    //         $doll.addClass("boost");
+    //     } else {
+    //         $doll.removeClass("boost");
+    //     }
+    //     return $doll.show();
+    // }
 
     window.Render = {
         sprite : renderSprite,

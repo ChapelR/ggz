@@ -2,7 +2,7 @@
     // lookup database content
     "use strict";
 
-    let locale = 3; // human translated english by default
+    let locale = 3; // human translated english for speaker names by default
 
     function returnLocalVersion (array, override) {
         if (!array || !(array instanceof Array) || !array.length) {
