@@ -223,21 +223,17 @@
             }
 
             // render
-            if (!left[0]) {
-                $("#doll-l img").hide().attr("src", "");
-            } else {
-                Render.image.left(left[0], left[1], left[2]);
+            Render.clear();
+            if (left[0]) {
+                Render.sprite("center-left", left[0], left[1], left[2]);
             }
-            if (!right[0]) {
-                $("#doll-r img").hide().attr("src", "");
-            } else {
-                Render.image.right(right[0], right[1], right[2]);
+            if (right[0]) {
+                Render.sprite("center-right", left[0], left[1], left[2]);
             }
         }
 
-        static clearPortraits () {
-            $("#doll-l img").hide().attr("src", "");
-            $("#doll-r img").hide().attr("src", "");
+        static clearSprites () {
+            Render.clear();
         }
 
         static clearText () {
@@ -245,7 +241,7 @@
         }
 
         static clearAllContent () {
-            Scene.clearPortraits();
+            Scene.clearSprites();
             Scene.clearText();
         }
 
@@ -255,7 +251,7 @@
 
         static renderCG (instruction) {
             const cg = Scene.fetchCG(instruction[1]);
-            Scene.clearPortraits();
+            Scene.clearSprites();
             $("body").css("background-image", "url('"  + cg +  "')");
             return cg;
         }

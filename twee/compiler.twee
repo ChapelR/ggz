@@ -139,8 +139,8 @@ As you complete story episodes, check marks will appear next to them on the chap
 
 :: test scene [nobr]
 <div id="sprites">
-    <div id="doll-l"><img src="img/kiana/101.png"></div>
-    <div id="doll-r"><img src="img/mei/201.png"></div>
+    <img class="p1" src="img/kiana/101.png">
+    <img class="p3" src="img/mei/201.png">
 </div>
 <div id="vn-box">
     <h2 id="name">Kiana</h2>

@@ -37,25 +37,62 @@
     border: 0;
     max-width: 88%;
     filter: drop-shadow(0 0 8px #333);
+    transition: all 200ms;
 }
 
-img.dim {
-    filter: brightness(0.7) !important;
+#sprites img.dim {
+    filter: brightness(0.7);
+}
+
+#sprites img.p0 {
+    /* position 0: far left */
+    position: fixed;
+    left: -25%;
+    z-index: 5;
+}
+
+#sprites img.p1 {
+    /* position 1: center left */
+    position: fixed;
+    left: -10%;
+    z-index: 4;
+}
+
+#sprites img.p2 {
+    /* position 2: center */
+    position: fixed;
+    left: 10%;
+    z-index: 3;
+}
+
+#sprites img.p3 {
+    /* position 3: center right */
+    position: fixed;
+    right: -10%;
+    z-index: 2;
+}
+
+#sprites img.p4 {
+    /* position 4: far right */
+    position: fixed;
+    right: -25%;
+    z-index: 1;
+}
+
+#sprites img.boost {
+    top: -3rem;
 }
 
 #doll-l img {
     position: fixed;
     left: -10%;
+    z-index: 2;
 }
 
 #doll-r img {
     position: fixed;
     right: -10%;
     z-index: -1;
-}
-
-#doll-r img.boost {
-    top: -3rem;
 }
 
 #vn-box {

@@ -1,6 +1,50 @@
 (() => {
     "use strict";
 
+    const allPositions = ["p0", "p1", "p2", "p3", "p4"];
+
+    const spritePositions = {
+        "left" : "p0",
+        "center-left": "p1",
+        "center": "p2",
+        "center-right": "p3",
+        "right": "p4"
+    };
+
+    function getPositionClass (name, img) {
+        const cls = spritePositions[name];
+        if (img) {
+            $(img)
+                .removeClass(allPositions)
+                .addClass(cls);
+        }
+        return cls;
+    }
+
+    function clearSprites () {
+        return $("#sprites").empty();
+    }
+
+    function renderSprite (position, id, idx, dim, classList = []) {
+        const path = Data.image(id, idx);
+        const $img = $(document.createElement("img"))
+            .attr("src", "img/" + path);
+        getPositionClass(position, $img);
+        if (!(classList instanceof Array)) {
+            classList = [];
+        }
+        if (!!dim) {
+            classList.push("dim");
+        }
+        if (id == 3) { // alwasy boost corrupted mei
+            classList.push("boost");
+        }
+        if (classList.length) {
+            $img.addClass(classList);
+        }
+        $("#sprites").append($img);
+    }
+
     function renderLeftSide (id, idx, dim = false) {
         const path = Data.image(id, idx);
         const $doll = $("#doll-l img");
@@ -31,10 +75,8 @@
     }
 
     window.Render = {
-        image : {
-            right : renderRightSide, // id, idx, dim, boost
-            left : renderLeftSide // id, idx, dim
-        }
+        sprite : renderSprite,
+        clear : clearSprites
     };
 
 
