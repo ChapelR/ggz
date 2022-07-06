@@ -14,6 +14,7 @@ const files = {
         "cfg.js",
         "files.js",
         "database.js",
+        "render.js",
         "load-chapter.js",
         "parser.js",
         "engine.js",
