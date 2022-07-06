@@ -37,7 +37,9 @@
     border: 0;
     max-width: 88%;
     filter: drop-shadow(0 0 8px #333);
-    transition: all 200ms;
+    transition: filter 200ms ease-in-out, 
+        left 200ms ease-in-out, 
+        right 200ms ease-in-out;
 }
 
 #sprites img.dim {
@@ -81,6 +83,10 @@
 
 #sprites img.boost {
     top: -3rem;
+}
+
+#sprites img.expired {
+    z-index: 10;
 }
 
 #doll-l img {

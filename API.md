@@ -52,6 +52,16 @@ You can use the `dim` argument to "darken" the sprite; a dimmed sprite will be f
 
 Finally, you can also provide classes to the rendered `<img>` element the sprite uses. The only built-in class is `boost`, which causes the sprite to be pushed slight toward the top of the scene. You must provide classes as an array of strings.
 
+##### Rendering process
+
+The process for rendering a sprite is comprised of several steps, and can take some time to complete. 
+
+First, the existing sprites are checked; if a sprite with the same ID is identified, it's image resource is also checked. If the image resource is the same, the sprite container is left alone and can contribute to the next scene, though its position might be changed if appropriate. If the image resource is different even though the ID is the same, the sprite's container will still be re-used, and the new sprite will be rendered into the same container with a brief crossfade.
+
+Each sprite container that doesn't match an incoming sprite ID is marked as "expired." Any new sprites that are requested that do not match existing IDs are then added to the scene and positioned as appropriate.
+
+Finally all incoming sprites are shown, and then all "expiring" sprites are moved to the highest z-index layer and faded out and then removed from the scene, creating a fast crossfade effect.
+
 ### `Render.clear()`
 
 > `Render.clear()`
@@ -141,3 +151,31 @@ This method should be run after any scene is completed. It cleans up the scene's
 ### `setup.preload()`
 
 ### `setup.parse()`
+
+### `setup.typeSkip()`
+
+### `setup.curtain()`
+
+## Events
+
+The engine emits several events. Most of these are emitted on the `document`, or bubble up to the `document`, so that's the best place to listen for them.
+
+### `:sprite-render-start`
+
+Runs when a sprite begins to render. This event is emitted for every sprite rendered individually.
+
+### `:sprite-render-end`
+
+Runs when a sprite is finished rendering. This event is emitted for every sprite rendered individually.
+
+### `:process-instruction-start`
+
+Run just before an instruction (a single command from a scene script) is evaluated.
+
+### `:process-instruction-end`
+
+Run after an instruction (a single command from a scene script) is completed. For instructions that wait on users, this happens *after* the user interacts, as the instruction is not cleared and the next isn't loaded until that happens.
+
+### `:vn-advance`
+
+Run whenever the user advances in visual novel mode. Advancing happens when the instruction is waiting on the user and the user clicks on the text box or presses space and the next instruction is loaded. Note that if a typing animation is playing, the visual novel *will not be advanced*, instead the typing animation will be skipped, so the `:vn-advance` event can only be emitted after the typing animation ends.

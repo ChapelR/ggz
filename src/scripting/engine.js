@@ -223,12 +223,11 @@
             }
 
             // render
-            Render.clear();
             if (left[0]) {
                 Render.sprite("center-left", left[0], left[1], left[2]);
             }
             if (right[0]) {
-                Render.sprite("center-right", left[0], left[1], left[2]);
+                Render.sprite("center-right", right[0], right[1], right[2]);
             }
         }
 
@@ -299,13 +298,31 @@
                 return;
             }
             let ins = clone(list[idx]);
+            $(document).trigger({
+                type : ":process-instruction-start",
+                instruction : ins,
+                number : idx,
+                self : this
+            });
             let wait = Scene.processInstruction(ins, idx, this);
             idx ++;
             if (wait) {
                 $(document).one(":vn-advance.vn-mode", () => {
+                    $(document).trigger({
+                        type : ":process-instruction-end",
+                        instruction : ins,
+                        number : idx,
+                        self : this
+                    });
                     this.playInstructionList(list, idx);
                 });
             } else {
+                $(document).trigger({
+                    type : ":process-instruction-end",
+                    instruction : ins,
+                    number : idx,
+                    self : this
+                });
                 this.playInstructionList(list, idx);
             }
         }

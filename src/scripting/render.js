@@ -11,25 +11,104 @@
         "right": "p4"
     };
 
+    const ANIMATION_TIME = 200; // in ms
+
     function getPositionClass (name, img) {
         const cls = spritePositions[name];
         if (img) {
-            $(img)
-                .removeClass(allPositions)
-                .addClass(cls);
+            const $img = (img instanceof $) ? img : $(img);
+            if (!$img.hasClass(cls)) {
+                $img
+                    .removeClass(allPositions)
+                    .addClass(cls);
+            }
         }
         return cls;
+    }
+
+    function getSpriteElement (id) {
+        // retrieve img element based on sprite id
+        const $img = $("#sprite").find("img[data-id='" + String(id) + "']");
+        return $img[0] ? $img : null;
+    }
+
+    function spriteChanged ($img, id, idx) {
+        // determine if sprite is already rendered to image element
+        return $img.attr("data-id") === String(id) && $img.attr("data-idx") === String(idx);
     }
 
     function clearSprites () {
         return $("#sprites").empty();
     }
 
+    function clearMarkedSprites () {
+        $("#sprites img.expired").fadeOut(ANIMATION_TIME, function () {
+            // remove after animation completes
+            const $self = $(this);
+            $self.remove();
+
+            $(document).trigger({
+                type : ":sprite-cleanup",
+                removed : $self
+            });
+        });
+        // remove rendering class after a sec
+        setTimeout( () => {
+            $("#sprites img.rendering").removeClass("rendering");
+        }, Engine.minDomActionDelay || 50);
+    }
+
     function renderSprite (position, id, idx, dim, classList = []) {
         const path = Data.image(id, idx);
-        const $img = $(document.createElement("img"))
-            .attr("src", "img/" + path);
+        let $img = null;
+
+        $(document).trigger({
+            type : ":sprite-render-start",
+            sprite : { id, idx, dim, classList, path }
+        });
+
+        // first, mark old sprites
+        $("#sprites img").each( function () {
+            const $self = $(this);
+            if (!$self.hasClass("rendering")) {
+                $self.addClass("expired");
+            }
+        });
+
+        // first, attempt to reuse an image element if possible:
+        $img = getSpriteElement(id);
+
+        if ($img) {
+            // do not clear image
+            $img
+                .removeClass("expired")
+                .addClass("rendering");
+            if (spriteChanged($img, id, idx)) {
+                // render new image content
+                $img.attr({
+                    "src" : "img/" + path,
+                    "data-idx" : idx
+                });
+            }
+        } else {
+            // create new image container, and fade it in.
+            $img = $(document.createElement("img"))
+                .attr({
+                    "src" : "img/" + path,
+                    "data-id" : id,
+                    "data-idx" : idx
+                })
+                .addClass("rendering")
+                .appendTo("#sprites");
+        }
+
+        // cleanup old sprites; should essentially crossfade
+        clearMarkedSprites();
+
+        // set positional class on image
         getPositionClass(position, $img);
+
+        // set additional classes as appropriate
         if (!(classList instanceof Array)) {
             classList = [];
         }
@@ -42,37 +121,12 @@
         if (classList.length) {
             $img.addClass(classList);
         }
-        $("#sprites").append($img);
+
+        $(document).trigger({
+            type : ":sprite-render-end",
+            element : $img
+        });
     }
-
-    // function renderLeftSide (id, idx, dim = false) {
-    //     const path = Data.image(id, idx);
-    //     const $doll = $("#doll-l img");
-    //     $doll.attr("src", "img/" + path);
-    //     if (dim) {
-    //         $doll.addClass("dim");
-    //     } else {
-    //         $doll.removeClass("dim");
-    //     }
-    //     return $doll.show();
-    // }
-
-    // function renderRightSide (id, idx, dim = false, boost = false) {
-    //     const path = Data.image(id, idx);
-    //     const $doll = $("#doll-r img");
-    //     $doll.attr("src", "img/" + path);
-    //     if (dim) {
-    //         $doll.addClass("dim");
-    //     } else {
-    //         $doll.removeClass("dim");
-    //     }
-    //     if (boost || id == 3) {
-    //         $doll.addClass("boost");
-    //     } else {
-    //         $doll.removeClass("boost");
-    //     }
-    //     return $doll.show();
-    // }
 
     window.Render = {
         sprite : renderSprite,

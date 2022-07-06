@@ -148,10 +148,7 @@ As you complete story episodes, check marks will appear next to them on the chap
 </div>
 
 :: scene skeleton [nobr]
-<div id="sprites">
-    <div id="doll-l"><img src="img/missing.png"></div>
-    <div id="doll-r"><img src="img/missing.png"></div>
-</div>
+<div id="sprites"></div>
 <div id="vn-box">
     <h2 id="name"></h2>
     <p id="content"></p>
