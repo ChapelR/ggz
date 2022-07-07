@@ -1,6 +1,8 @@
 (() => {
     "use strict";
 
+    const debugBuild = null; // set to true or false to override
+
     // state
     State.variables.completed = [];
 
@@ -20,5 +22,11 @@
     $(window).on("unload", () => {
         SugarCube.session.clear();
     });
+
+    function isDebugBuild () {
+        return (debugBuild != null) ? debugBuild : location.hostname === "localhost" || location.hostname === "127.0.0.1";
+    }
+
+    setup.isDebug = isDebugBuild;
 
 })();

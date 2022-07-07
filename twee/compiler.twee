@@ -46,7 +46,7 @@ As you complete story episodes, check marks will appear next to them on the chap
 <div class="shaded-box">
     <h2>Select a Chapter to Play!</h2>
     <<listchapters>>
-    <<button [[See the sprite test.|test script]]>><</button>>
+    <<if setup.isDebug()>><<button [[(debug) test scene|test script]]>><</button>><</if>>
 </div>
 
 :: Chapter Start [menu nobr]

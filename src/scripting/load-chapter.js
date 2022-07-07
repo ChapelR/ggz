@@ -3,35 +3,41 @@
     "use strict";
 
     const CHAPTER_LIST = [
-        { // done
+        {
             name : "Prologue",
             episodes : 3,
-            index : 0
+            index : 0,
+            done : true
         },
         { // done
             name : "Chapter of Memories",
             episodes : 8,
-            index : 1
+            index : 1,
+            done : true
         },
         {
             name : "Haunted House",
             episodes : 7,
-            index : 2
+            index : 2,
+            done : false
         },
         { // done
             name : "Sakura",
             episodes : 1,
-            index : 3
+            index : 3,
+            done : true
         },
         {
             name : "Chapter of Birth",
             episodes : 1,
-            index : 4
+            index : 4,
+            done : false
         },
         {
             name : "Lost Child",
             episodes : 3,
-            index : 12
+            index : 12,
+            done : true
         }
     ];
 
@@ -69,6 +75,9 @@
         $label.append($selector);
 
         CHAPTER_LIST.forEach( (chapter, idx) => {
+            if (!chapter.done && !setup.isDebug()) {
+                return;
+            }
             idx = chapter.index || idx;
             let $ul = $(document.createElement("ul"))
                 .addClass("chapter-select")
@@ -104,7 +113,7 @@
             }
             $selector.append( $(document.createElement("option"))
                 .attr("value", idx)
-                .append(chapter.name));
+                .append(chapter.name + ((!chapter.done && setup.isDebug()) ? " [DEBUG]" : "")));
             $wrapper.append($ul);
         });
         $selector.on("change", () => {
