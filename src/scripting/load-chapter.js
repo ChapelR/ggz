@@ -38,8 +38,23 @@
     }
 
     function listAvailableEpisodes () {
-        const $ul = $(document.createElement("ul")).addClass("chapter-select");
+        const $wrapper = $(document.createElement("div"));
+        const $label = $(document.createElement("label"))
+            .attr("for", "chapter");
+        const $selector = $(document.createElement("select"))
+            .attr("name", "chapter");
+        $wrapper.append($label);
+        $label.append($selector);
+
         CHAPTER_LIST.forEach( (chapter, idx) => {
+            let $ul = $(document.createElement("ul"))
+                .addClass("chapter-select")
+                .attr("data-chapter", idx);
+
+            if (idx !== 0) {
+                $ul.hide();
+            }
+
             for (let i = 1; i <= chapter.episodes; i++) {
                 const curr = getChapterName(idx, i);
                 const $a = createA(curr, idx, i);
@@ -64,8 +79,24 @@
                 });
                 /* jshint ignore:end */
             }
+            $selector.append( $(document.createElement("option"))
+                .attr("value", idx)
+                .append(chapter.name));
+            $wrapper.append($ul);
         });
-        return $ul;
+        $selector.on("change", () => {
+            let selected = Number($selector.val());
+            if (typeof selected !== "number" || Number.isNaN(selected)) {
+                selected = 0;
+            }
+            $wrapper
+                .find("ul")
+                .hide();
+            $wrapper
+                .find("ul[data-chapter='" + selected + "']")
+                .show();
+        });
+        return $wrapper;
     }
 
     window.Data = Object.assign(window.Data, {
