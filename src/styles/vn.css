@@ -47,35 +47,35 @@
 #sprites img.p0 {
     /* position 0: far left */
     position: fixed;
-    transform: translateX(-30%);
+    transform: translateX(-35%);
     z-index: 5;
 }
 
 #sprites img.p1 {
     /* position 1: center left */
     position: fixed;
-    transform: translateX(-15%);
+    transform: translateX(-12%);
     z-index: 4;
 }
 
 #sprites img.p2 {
     /* position 2: center */
     position: fixed;
-    transform: translateX(10%);
+    transform: translateX(12%);
     z-index: 3;
 }
 
 #sprites img.p3 {
     /* position 3: center right */
     position: fixed;
-    transform: translateX(30%);
+    transform: translateX(35%);
     z-index: 2;
 }
 
 #sprites img.p4 {
     /* position 4: far right */
     position: fixed;
-    transform: translateX(50%);
+    transform: translateX(58%);
     z-index: 1;
 }
 

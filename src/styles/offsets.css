@@ -1,0 +1,7 @@
+/* offset images because MHY is insane */
+img[src*="mei/202"] {
+    padding-left: 28px;
+}
+img[src*="mei/203"] {
+    padding-left: 28px;
+}

@@ -25,6 +25,7 @@ const files = {
         "loader.css",
         "select.css",
         "vn.css",
+        "offsets.css",
         "mobile.css"
     ]
 };
