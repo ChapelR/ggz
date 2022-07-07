@@ -5,3 +5,12 @@ img[src*="mei/202"] {
 img[src*="mei/203"] {
     padding-left: 28px;
 }
+img[src*="mei/203"] {
+    padding-left: 28px;
+}
+img[src*="bronya"], img[src*="seele"] {
+    top: 2rem;
+}
+img[src*="theresa"] {
+    top: 0rem;
+}

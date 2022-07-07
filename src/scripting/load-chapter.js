@@ -5,20 +5,42 @@
     const CHAPTER_LIST = [
         {
             name : "Prologue",
-            episodes : 3
+            episodes : 3,
+            index : 0
         },
         {
             name : "Chapter of Memories",
-            episodes : 8
+            episodes : 8,
+            index : 1
+        },
+        {
+            name : "Haunted House",
+            episodes : 7,
+            index : 2
+        },
+        {
+            name : "Sakura",
+            episodes : 1,
+            index : 3
+        },
+        {
+            name : "Chapter of Birth",
+            episodes : 1,
+            index : 4
+        },
+        {
+            name : "Lost Child",
+            episodes : 3,
+            index : 12
         }
     ];
 
-    function getChapterName (chapter, episode) {
-        return setup.chapters.story.main[chapter].episodes[episode - 1].name;
+    function getChapterName (index, episode) {
+        return setup.chapters.story.main[index].episodes[episode - 1].name;
     }
 
-    function loadChapter (chapter, episode) {
-        const chapterData = State.variables.chapter = setup.chapters.story.main[chapter].episodes[episode - 1];
+    function loadChapter (index, episode) {
+        const chapterData = State.variables.chapter = setup.chapters.story.main[index].episodes[episode - 1];
         
         return chapterData;
     }
@@ -47,6 +69,7 @@
         $label.append($selector);
 
         CHAPTER_LIST.forEach( (chapter, idx) => {
+            idx = chapter.index || idx;
             let $ul = $(document.createElement("ul"))
                 .addClass("chapter-select")
                 .attr("data-chapter", idx);
