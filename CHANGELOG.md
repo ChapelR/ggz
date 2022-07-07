@@ -1,9 +1,11 @@
 # Version 0.3.0
 
 ## Technical
-- Rewrote and reimplemented sprite parsing. The engine now supports any number of sprites, which can be assigned to one of five positions. Sprites now transition more smoothly between indexed image sources using crossfades, quickly fade out when removed from the scene, smoothly transition in and out of dimmed mode, and can be smoothly translated across the screen to different positions.
+- Rewrote and reimplemented sprite renderer. The engine now supports any number of sprites, which can be assigned to one of five positions. Sprites now transition more smoothly between indexed image sources using crossfades, quickly fade out when removed from the scene, smoothly transition in and out of dimmed mode, and can be smoothly translated across the screen to different positions.
+- Changed default sprite positions to more evenly use the available screen space.
+- Added "offsets" to sprites to position them correctly. Characters are often positioned in slightly different places within the PNG transparency, often times even the same character will have sprites with slight deviations to the left or right. I added offsets to compensate for these inconsistencies in sprites where they seemed to be unintentional (some sprites with these different positions are clearly intended to be the way they are as a brute-force method of positioning).
 - Added `(CN:...)` and `(JP:...)` to recognized syntax for translator's notes.
-- Added script custom parsing. Will probably fork this into a separate VN engine eventually.
+- Added script custom parsing. Will probably fork this into a separate VN engine eventually, but it's still very tied to GGZ-style data.
 
 ## Meta
 - Improved build process and added code compression.

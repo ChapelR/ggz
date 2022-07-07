@@ -46,6 +46,7 @@ As you complete story episodes, check marks will appear next to them on the chap
 <div class="shaded-box">
     <h2>Select a Chapter to Play!</h2>
     <<listchapters>>
+    <<button [[See the sprite test.|test script]]>><</button>>
 </div>
 
 :: Chapter Start [menu nobr]
@@ -71,7 +72,7 @@ As you complete story episodes, check marks will appear next to them on the chap
 :: Chapter End [menu]
 <<audio ":playing" stop>>\
 <<audio "001" play loop volume 1>>\
-<h2>Completed <<= $chapter.name>></h2>
+<h2>Completed <<= $chapter && $chapter.name ? $chapter.name : "Chapter">></h2>
 
 <<button [[Chapter Select]]>>
     <<run Scene.cleanup()>>

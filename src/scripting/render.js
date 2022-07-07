@@ -140,5 +140,10 @@
         clearExpired : clearMarkedSprites
     };
 
+    // rendering process:
+        // 1. call Render.init()
+        // 2. parse portrait instructions and iterate over them
+        // 3. call Render.sprite() on each portrait insruction
+        // 4. call Render.clearExpired() to finish rendering process
 
 })();

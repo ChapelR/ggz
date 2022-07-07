@@ -274,6 +274,7 @@
         }
 
         static message (instruction) {
+            // this should be locale based, not hard-coded (TODO)
             if (!instruction[5]) {
                 return instruction[2];
             }
