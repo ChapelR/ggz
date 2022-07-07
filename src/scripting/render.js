@@ -58,7 +58,7 @@
                 removed : $self
             });
         });
-        // remove rendering class after a sec
+        // remove rendering class (give 50ish ms for rendering)
         setTimeout( () => {
             $("#sprites img.rendering").removeClass("rendering");
         }, Engine.minDomActionDelay || 50);
@@ -69,6 +69,7 @@
         $("#sprites img").each( function () {
             const $self = $(this);
             if (!$self.hasClass("rendering")) {
+                // probably don't need to check, just mark all expired
                 $self.addClass("expired");
             }
         });

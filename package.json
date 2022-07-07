@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node build.js && tweego --head temp/head.html -o dist/index.html twee",
     "lint": "jshint src/scripting",
-    "serve": "cd dist && http-server -c0 -o"
+    "start": "cd dist && http-server -c0 -o"
   },
   "repository": {
     "type": "git",
