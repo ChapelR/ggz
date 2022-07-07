@@ -3,12 +3,12 @@
     "use strict";
 
     const CHAPTER_LIST = [
-        {
+        { // done
             name : "Prologue",
             episodes : 3,
             index : 0
         },
-        {
+        { // done
             name : "Chapter of Memories",
             episodes : 8,
             index : 1
@@ -18,7 +18,7 @@
             episodes : 7,
             index : 2
         },
-        {
+        { // done
             name : "Sakura",
             episodes : 1,
             index : 3

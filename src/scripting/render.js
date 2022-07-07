@@ -74,13 +74,13 @@
         });
     }
 
-    function renderSprite (position, id, idx, dim, classList = []) {
+    function renderSprite (position, id, idx, dim, boost) {
         const path = Data.image(id, idx);
         let $img = null;
 
         $(document).trigger({
             type : ":sprite-render-start",
-            sprite : { id, idx, dim, classList, path }
+            sprite : { id, idx, dim, boost, path }
         });
 
         // first, attempt to reuse an image element if possible:
@@ -114,17 +114,15 @@
         getPositionClass(position, $img);
 
         // set additional classes as appropriate
-        if (!(classList instanceof Array)) {
-            classList = [];
-        }
         if (!!dim) {
-            classList.push("dim");
+            $img.addClass("dim");
+        } else {
+            $img.removeClass("dim");
         }
-        if (id == 3 && !classList.includes("boost")) { // always "boost" corrupted mei
-            classList.push("boost");
-        }
-        if (classList.length) {
-            $img.addClass(classList);
+        if ((id == 3 && !boost) || !!boost) { // always "boost" corrupted mei
+            $img.addClass("boost");
+        } else if (!boost) {
+            $img.removeClass("boost");
         }
 
         $(document).trigger({

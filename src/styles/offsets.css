@@ -1,4 +1,6 @@
 /* offset images because MHY is insane */
+
+/* mei senpai */
 img[src*="mei/202"] {
     padding-left: 28px;
 }
@@ -8,9 +10,16 @@ img[src*="mei/203"] {
 img[src*="mei/203"] {
     padding-left: 28px;
 }
+/* short girl squad */
 img[src*="bronya"], img[src*="seele"] {
     top: 2rem;
 }
 img[src*="theresa"] {
     top: 0rem;
+}
+/* sakura */
+img[src*="worldboss1/011"], img[src*="worldboss1/012"] {
+    top: -5rem;
+}img[src*="worldboss1/010"] {
+    top: -1rem;
 }
