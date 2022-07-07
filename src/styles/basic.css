@@ -5,6 +5,10 @@
     src: url("sdk/font/zh-cn.ttf");
 }
 
+* {
+    -webkit-tap-highlight-color: transparent !important;
+}
+
 html {
     font-size: 16px;
 }
@@ -20,6 +24,10 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     transition: background 150ms;
+}
+
+select {
+    background-color: #222c;
 }
 
 .hide {

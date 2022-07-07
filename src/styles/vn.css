@@ -31,6 +31,7 @@
     width: 100%;
     top: 4rem;
     left: 0;
+    user-select: none;
 }
 
 #sprites img {
@@ -38,6 +39,7 @@
     max-width: 88%;
     filter: drop-shadow(0 0 8px #333);
     transition: filter 200ms ease-in-out, transform 200ms ease-in-out;
+    user-select: none;
 }
 
 #sprites img.dim {
