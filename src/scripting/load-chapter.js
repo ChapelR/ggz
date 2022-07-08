@@ -11,7 +11,7 @@
             index : 0,
             done : true
         },
-        { // done
+        {
             name : "Retrospective",
             episodes : 8,
             index : 1,
@@ -24,7 +24,7 @@
             index : 2,
             done : false
         },
-        { // done
+        {
             name : "Sakura",
             episodes : 1,
             index : 3,
@@ -34,7 +34,8 @@
             name : "Chapter of Birth",
             episodes : 1,
             index : 4,
-            done : false
+            done : false,
+            incomplete: true
         },
         {
             name : "Lost Child",
