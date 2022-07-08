@@ -88,7 +88,7 @@
                         $(document).trigger(":scene-loaded"); // show start button
                     }
                 } else {
-                    readJSON("data/" + chapterData.parts, data => {
+                    readJSON(`data/${chapterData.parts}`, data => {
                         const script = clone(data);
                         self.script = script;
                         self.seq = processScript(script);
@@ -263,13 +263,13 @@
         }
 
         static fetchCG (id) {
-            return "cg/" + id + ".png";
+            return `cg/${id}.png`;
         }
 
         static renderCG (instruction) {
             const cg = Scene.fetchCG(instruction[1]);
             Scene.clearSprites();
-            $("body").css("background-image", "url('"  + cg +  "')");
+            $("body").css("background-image", `url("${cg}")`);
             return cg;
         }
 
@@ -285,9 +285,9 @@
             const msg = parseLineForTN(Scene.message(instruction).replace(/\/\/n/g, ' '));
             if (msg.tn) {
                 // do something with translation notes, eventually...
-                console.log("Translator's Note: " + msg.tn);
+                console.log(`Translator's Note: ${msg.tn}`);
             }
-            return $("#content").empty().wiki("<<type " + TYPING_SPEED + "ms start " + LOCKOUT_TIME + "ms>><html>" + msg.line + "</html><</type>>");
+            return $("#content").empty().wiki(`<<type ${TYPING_SPEED}ms start ${LOCKOUT_TIME}ms>><html>${msg.line}</html><</type>>`);
         }
 
         static processInstruction (instruction, idx, instance) {
@@ -397,7 +397,7 @@
 
         getAllPortraitPaths () {
             let portraits = this.getPortraitList().map( id => {
-                return "img/" + Data.image(id[0], id[1]);
+                return Render.path + Data.image(id[0], id[1]);
             });
             return [...new Set(portraits)];
         }
@@ -432,7 +432,7 @@
 
         getAllBGPaths () {
             let tex = this.getBGList().map( id => {
-                return "tex/" + id +  "_1280x720.png";
+                return `tex/${id}_1280x720.png`;
             });
             return [...new Set(tex)];
         }

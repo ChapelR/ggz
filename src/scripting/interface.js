@@ -94,7 +94,7 @@
         
         $("#drawer").addClass("hidden");
         if (tags().includes("splash")) {
-            $(document.body).css("background-image", "url('splash/" + random(SPLASH_SCREENS) + ".jpg')");
+            $(document.body).css("background-image", `url("splash/${random(SPLASH_SCREENS)}.jpg")`);
         } else {
             $(document.body).css("background-image", "");
         }

@@ -174,7 +174,7 @@
                     return processPortParts(array);
                 });
         } catch (err) {
-            ex(err, "Could not process portrait data: " + data);
+            ex(err, `Could not process portrait data: ${data}`);
         }
     }
 

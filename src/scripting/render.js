@@ -3,6 +3,8 @@
 
     setup.allPositions = ["p0", "p1", "p2", "p3", "p4"];
 
+    const RENDER_PATH = "img/";
+
     const spritePositions = {
         "left" : "p0",
         "center-left": "p1",
@@ -34,13 +36,22 @@
 
     function getSpriteElement (id) {
         // retrieve img element based on sprite id
-        const $img = $("#sprites").find("img[data-id='" + String(id) + "']");
+        const $img = $("#sprites").find(`img[data-id="${String(id)}"]`);
         return $img[0] ? $img : null;
     }
 
     function spriteChanged ($img, id, idx) {
         // determine if sprite is already rendered to image element
         return $img.attr("data-id") === String(id) && $img.attr("data-idx") === String(idx);
+    }
+
+    function createSpriteContainer () {
+        return $(document.createElement("img"))
+            .on("error", function () {
+                const $self = $(this);
+                console.error(`No image file @ ${$self.attr("src")}.`)
+                $self.attr("src", "img/missing.png");
+            });
     }
 
     function clearSprites () {
@@ -95,15 +106,14 @@
             if (spriteChanged($img, id, idx)) {
                 // render new image content
                 $img.attr({
-                    "src" : "img/" + path,
+                    "src" : RENDER_PATH + path,
                     "data-idx" : idx
                 });
             }
         } else {
-            // create new image container
-            $img = $(document.createElement("img"))
+            $img = createSpriteContainer() // returns new image element w/ fallback
                 .attr({
-                    "src" : "img/" + path,
+                    "src" : RENDER_PATH + path,
                     "data-id" : id,
                     "data-idx" : idx
                 })
@@ -132,12 +142,14 @@
         });
     }
 
-    window.Render = {
+    window.Render = Object.freeze({
         init : initRenderProcess,
+        createContainer : createSpriteContainer,
         sprite : renderSprite,
         clear : clearSprites,
-        clearExpired : clearMarkedSprites
-    };
+        clearExpired : clearMarkedSprites,
+        path : RENDER_PATH
+    });
 
     // rendering process:
         // 1. call Render.init()

@@ -2,6 +2,8 @@
     // handle cut scene data
     "use strict";
 
+    State.variables.lastChapterSelected = 0;
+
     const CHAPTER_LIST = [
         {
             name : "Prologue",
@@ -84,7 +86,7 @@
                 .addClass("chapter-select")
                 .attr("data-chapter", idx);
 
-            if (idx !== 0) {
+            if (idx !== (State.variables.lastChapterSelected || 0)) {
                 $ul.hide();
             }
 
@@ -130,13 +132,15 @@
             if (typeof selected !== "number" || Number.isNaN(selected)) {
                 selected = 0;
             }
+            State.variables.lastChapterSelected = selected;
             $wrapper
                 .find("ul")
                 .hide();
             $wrapper
-                .find("ul[data-chapter='" + selected + "']")
+                .find(`ul[data-chapter="${selected}"]`)
                 .show();
         });
+        $selector.val(State.variables.lastChapterSelected || 0)
         return $wrapper;
     }
 
