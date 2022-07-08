@@ -2,6 +2,11 @@ h2 {
     text-align: center;
 }
 
+ul.chapter-select {
+    margin-left: 0;
+    padding-left: 0;
+}
+
 .chapter-select li {
     list-style: none;
 }

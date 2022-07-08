@@ -24,7 +24,8 @@
     });
 
     function isDebugBuild () {
-        return (debugBuild != null) ? debugBuild : location.hostname === "localhost" || location.hostname === "127.0.0.1";
+        return (debugBuild != null) ? 
+            debugBuild : location.hostname === "localhost" || location.hostname === "127.0.0.1";
     }
 
     setup.isDebug = isDebugBuild;

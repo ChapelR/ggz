@@ -10,10 +10,11 @@
             done : true
         },
         { // done
-            name : "Chapter of Memories",
+            name : "Retrospective",
             episodes : 8,
             index : 1,
-            done : true
+            done : true,
+            incomplete: true
         },
         {
             name : "Haunted House",
@@ -37,7 +38,7 @@
             name : "Lost Child",
             episodes : 3,
             index : 12,
-            done : true
+            done : false
         }
     ];
 
@@ -111,9 +112,17 @@
                 });
                 /* jshint ignore:end */
             }
+
             $selector.append( $(document.createElement("option"))
                 .attr("value", idx)
                 .append(chapter.name + ((!chapter.done && setup.isDebug()) ? " [DEBUG]" : "")));
+
+            if (chapter.incomplete) {
+                createLi()
+                    .wiki("More episodes coming soon!")
+                    .appendTo($ul);
+            }
+
             $wrapper.append($ul);
         });
         $selector.on("change", () => {
