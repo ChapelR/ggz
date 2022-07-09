@@ -145,10 +145,10 @@
         return $wrapper;
     }
 
-    window.Data = Object.assign(window.Data, {
+    window.Data = Object.freeze(Object.assign(window.Data, {
         chapter : loadChapter,
         listChapters : listAvailableEpisodes
-    });
+    }));
 
     Macro.add("listchapters", {
         skipArgs : true,

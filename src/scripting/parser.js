@@ -3,7 +3,8 @@
     "use strict";
 
     const PART_MARKER = /#+/g;
-    const DIRECTIVE_MARKER = /(.*)>(.*)/;
+    const COMMENT_MARKER = /\s*\/\/.*/; // not implemented (should be thrown out)
+    const DIRECTIVE_MARKER = /(.*?)>(.*)/;
     const NEW_LINE = /\n+/;
     const PORTRAIT_SEP = /\]\s*?\[/g; // split portrait data
 
@@ -109,38 +110,6 @@
             .replace("]", "");
     }
 
-    // function processPortData (arr) {
-    //     let id = arr[0];
-    //     let idx = processNumber(arr[1]);
-    //     let dim = processBoolean(arr[2]);
-    //     let pos = processString(arr[3]);
-    //     if (isQuotes(id)) {
-    //         id = "";
-    //     } else {
-    //         id = processNumber(id);
-    //     }
-    //     return [id, idx, dim];
-    // }
-
-    // function portraitData (data) {
-    //     const matches = PORTRAIT_DATA.exec(data);
-    //     let left = matches[1].trim();
-    //     let right = matches[2].trim();
-    //     if (!left) {
-    //         left = "[\"\", 0, false]";
-    //     }
-    //     if (!right) {
-    //         right = "[\"\", 0, false]";
-    //     }
-    //     left = stripBrackets(left).split(",")
-    //         .map( part => { return part.trim(); });
-    //     right = stripBrackets(right).split(",")
-    //         .map( part => { return part.trim(); });
-        
-    //     return [ processPortData(left), processPortData(right) ];
-        
-    // }
-
     function processPortParts (arr) {
         let id = arr[0];
         let idx = processNumber(arr[1]);
@@ -166,7 +135,7 @@
                     if (!p || !p.trim()) {
                         return ["", 0, false];
                     }
-                    p = p.trim().replace("[", "").replace("]", "").trim();
+                    p = stripBrackets(p).trim();
                     if (!p || !p.trim()) {
                         return ["", 0, false];
                     }

@@ -11,9 +11,7 @@
 
     function fetchMediaContent (fileName) {
         // prevent undefined, remove need for cloning
-        const media = {};
-        Object.assign(media, setup.media[fileName] || {});
-        return media;
+        return Object.assign({}, setup.media[fileName] || {});
     }
 
     function processScript (script) {
@@ -25,14 +23,14 @@
     }
 
     // translation notes
-    const TN_NOTE = /\([T|J|C][P|N]:(.*)\)/; // (TN:...), (CN:...), (JP:...)
+    const TN_NOTE = /\((TN|JP|CN):(.*)\)/; // (TN:...), (CN:...), (JP:...)
     function parseLineForTN (line) {
         const match = TN_NOTE.exec(line);
         if (!match) {
             return { tn : "", line };
         }
         // remove notes from line
-        return { tn : match[1], line : line.replace(TN_NOTE, "") };
+        return { tn : match[2], line : line.replace(TN_NOTE, "") };
     }
 
     // remove/change portraits via a patch
@@ -456,7 +454,7 @@
         }
     }
 
-    window.Scene = Scene;
+    window.Scene = Object.freeze(Scene);
 
     $(document).on(":passagedisplay", () => {
         $(document).off(":vn-advance.vn-mode");

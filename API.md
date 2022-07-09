@@ -186,13 +186,17 @@ This method should be run after any scene is completed. It cleans up the scene's
 
 The engine emits several events. Most of these are emitted on the `document`, or bubble up to the `document`, so that's the best place to listen for them.
 
-### `:sprite-render-start`
+### `:sprite-render`
 
 Runs when a sprite begins to render. This event is emitted for every sprite rendered individually.
 
-### `:sprite-render-end`
+### `:sprite-cleanup`
 
 Runs when a sprite is finished rendering. This event is emitted for every sprite rendered individually.
+
+### `render-init`
+
+### `render-end`
 
 ### `:process-instruction-start`
 

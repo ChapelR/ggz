@@ -72,28 +72,19 @@
         // remove rendering class (give 50ish ms for rendering)
         setTimeout( () => {
             $("#sprites img.rendering").removeClass("rendering");
+            $(document).trigger(":render-end");
         }, Engine.minDomActionDelay || 50);
     }
 
     function initRenderProcess () {
         // start up render process, by marking existing sprites as expired
-        $("#sprites img").each( function () {
-            const $self = $(this);
-            if (!$self.hasClass("rendering")) {
-                // probably don't need to check, just mark all expired
-                $self.addClass("expired");
-            }
-        });
+        $("#sprites img").addClass("expired");
+        $(document).trigger(":render-init");
     }
 
     function renderSprite (position, id, idx, dim, boost) {
         const path = Data.image(id, idx);
         let $img = null;
-
-        $(document).trigger({
-            type : ":sprite-render-start",
-            sprite : { id, idx, dim, boost, path }
-        });
 
         // first, attempt to reuse an image element if possible:
         $img = getSpriteElement(id);
@@ -137,7 +128,7 @@
         }
 
         $(document).trigger({
-            type : ":sprite-render-end",
+            type : ":sprite-render",
             element : $img
         });
     }

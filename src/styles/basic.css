@@ -5,6 +5,12 @@
     src: url("sdk/font/zh-cn.ttf");
 }
 
+@font-face {
+    font-family: "ox";
+    src: url("sdk/ox.ttf");
+    unicode-range: U+30-39;
+}
+
 * {
     -webkit-tap-highlight-color: transparent !important;
 }
@@ -62,7 +68,7 @@ button {
     background: #806;
     border-radius: 2px 10px;
     padding: 0.6rem;
-    font-family: "zh", Helvetica, Arial, sans-serif;
+    font-family: "ox", "zh", Helvetica, Arial, sans-serif;
 }
 
 button:hover {
