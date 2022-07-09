@@ -33,6 +33,28 @@
         return { tn : match[2], line : line.replace(TN_NOTE, "") };
     }
 
+    function createNote (note) {
+        note = String(note).trim();
+        if (note) {
+            // create link for note
+            const $tnote = $(document.createElement("a"))
+                .append("i")
+                .addClass("tn")
+                .appendTo("#vn-box")
+                .ariaClick( { label : "Translation Note" }, e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    Dialog.setup("Translation Note", "t8n-note");
+                    Dialog.wiki(note);
+                    Dialog.open();
+                });
+            // automatically delete note on advance
+            $(document).one(":vn-advance.tn-note-clear", () => {
+                $tnote.remove();
+            });
+        }
+    }
+
     // remove/change portraits via a patch
     const portraitPatches = new Map();
     function createPortraitPatch (file, part, side, idxStart, idxEnd, data) {
@@ -283,7 +305,7 @@
             const msg = parseLineForTN(Scene.message(instruction).replace(/\/\/n/g, ' '));
             if (msg.tn) {
                 // do something with translation notes, eventually...
-                console.log(`Translator's Note: ${msg.tn}`);
+                createNote(msg.tn);
             }
             return $("#content").empty().wiki(`<<type ${TYPING_SPEED}ms start ${LOCKOUT_TIME}ms>><html>${msg.line}</html><</type>>`);
         }

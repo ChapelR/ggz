@@ -1,3 +1,8 @@
+# Version 0.4.0
+
+## Technical
+- Added translation note feature. Now when the text features a translation note, a small icon will appear in the text box. Clicking this icon will show the note in a modal.
+
 # Version 0.3.0
 
 ## Technical

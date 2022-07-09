@@ -66,7 +66,7 @@
 
             $(document).trigger({
                 type : ":sprite-cleanup",
-                removed : $self
+                element : $self
             });
         });
         // remove rendering class (give 50ish ms for rendering)
