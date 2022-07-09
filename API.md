@@ -276,7 +276,9 @@ Runs when a sprite begins to render. This event is emitted for every sprite rend
 Event properties:
 - `element`: This property holds the removed sprite container's `<img>` element as a JQuery instance.
 
-Runs when a sprite is finished rendering. This event is emitted for every sprite rendered individually.
+Runs when a sprite container is removed. This event is emitted for every sprite container that is removed individually. Note that sprite containers are re-used often, so not every sprite that is changed will ultimately trigger this event, only when the container (not the image) is removed.
+
+> Note to self: this is probably confusing and maybe this event shouldn't be documented.
 
 ### `render-init`
 
