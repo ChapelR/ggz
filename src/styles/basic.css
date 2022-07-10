@@ -69,10 +69,12 @@ button {
     border-radius: 2px 10px;
     padding: 0.6rem;
     font-family: "ox", "zh", Helvetica, Arial, sans-serif;
+    box-shadow: 0 0 4px #000;
 }
 
 button:hover {
     background: #a28;
+    box-shadow: 0 0 2px #000;
 }
 
 a {

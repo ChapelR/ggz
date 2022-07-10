@@ -66,7 +66,7 @@ This is the final part of the rendering process, and should be called after all 
 
 ### `Render.clear()`
 
-This method clears all sprites by completely emptying the sprite container. It is run every time a `"portraits"` instruction is run.
+This method clears all sprites by completely emptying the sprite container.
 
 ### `Render.createContainer()`
 
@@ -110,7 +110,7 @@ When the scene finishes loading, the instance will be stored in the `State.varia
 
 #### `Scene.cleanup()`
 
-This method should be run after any scene is completed. It cleans up the scene's data and `null`s everything out.
+This method should be run after any scene is completed. It cleans up the scene's data and `null`s everything out. Called automatically when a scene ends.
 
 #### `Scene.activateComicMode()`
 
@@ -264,6 +264,10 @@ The curtain blocks user interaction and suspends the processing of instrucitons 
 
 The engine emits several events. Most of these are emitted on the `document`, or bubble up to the `document`, so that's the best place to listen for them.
 
+### `:scene-loaded`
+
+Triggered when all assets for a scene have finished preloading. Creating a new `Scene` instance starts the preloading process.
+
 ### `:sprite-render`
 
 Event properties:
@@ -280,19 +284,29 @@ Runs when a sprite container is removed. This event is emitted for every sprite 
 
 > Note to self: this is probably confusing and maybe this event shouldn't be documented.
 
-### `render-init`
+### `:render-init`
 
 Runs when the render process starts, after a `"portraits"` instruction is called but before any sprites are rendered.
 
-### `render-end`
+### `:render-end`
 
 Runs when the render process ends, after all sprites for the current `"portraits"` instruction are rendered, before the next instruction is processed.
 
 ### `:process-instruction-start`
 
+Event properties:
+- `instruction`: The instruction data, which is an array.  
+- `number`: The index of the instruction in the current part.  
+- `self`: The current `Scene` instance running the instruction.
+
 Run just before an instruction (a single command from a scene script) is evaluated.
 
 ### `:process-instruction-end`
+
+Event properties:
+- `instruction`: The instruction data, which is an array.  
+- `number`: The index of the instruction in the current part.  
+- `self`: The current `Scene` instance running the instruction.
 
 Run after an instruction (a single command from a scene script) is completed. For instructions that wait on users, this happens *after* the user interacts, as the instruction is not cleared and the next isn't loaded until that happens.
 
