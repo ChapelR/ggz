@@ -1,6 +1,10 @@
 (() => {
     "use strict";
 
+    const DATABASE_PATH = "./database.json";
+    const CHAPTERS_PATH = "./chapters.json";
+    const MEDIA_PATH = "./data/media.json";
+
     // json
     window.readJSON = function readJSON (file, callback) {
         const rawFile = new XMLHttpRequest();
@@ -24,28 +28,28 @@
     }
 
     // load database files, w/ load screen
-    readJSONwLoadScreen("database.json", data => {
+    readJSONwLoadScreen(DATABASE_PATH, data => {
         setup.database = clone(data);
     });
-    readJSONwLoadScreen("chapters.json", data => {
+    readJSONwLoadScreen(CHAPTERS_PATH, data => {
         setup.chapters = clone(data);
         // patch in prologue "comics"
         setup.chapters.story.main[0].episodes = [
             {
                 "name": "Prologue Part 1",
-                "parts": "pre0.json"
+                "parts": "./data/pre0.json"
             },
             {
                 "name": "Prologue Part 2",
-                "parts": "prologue.json"
+                "parts": "./data/prologue.json"
             },
             {
                 "name": "Prologue Part 3",
-                "parts": "post0.json"
+                "parts": "./data/post0.json"
             }
         ];
     });
-    readJSONwLoadScreen("data/media.json", data => {
+    readJSONwLoadScreen(MEDIA_PATH, data => {
         setup.media = clone(data);
     });
 })();

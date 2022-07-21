@@ -3,7 +3,7 @@
 
     setup.allPositions = ["p0", "p1", "p2", "p3", "p4"];
 
-    const RENDER_PATH = "img/";
+    const RENDER_PATH = "https://ggz.amaryllisworks.pw/pic/";
 
     const spritePositions = {
         "left" : "p0",
@@ -50,7 +50,7 @@
             .on("error", function () {
                 const $self = $(this);
                 console.error(`No image file @ ${$self.attr("src")}.`)
-                $self.attr("src", "img/missing.png");
+                $self.attr("src", "missing.png");
             });
     }
 

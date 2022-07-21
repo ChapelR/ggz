@@ -7,7 +7,15 @@
     const PRELOAD = true; // force users to wait for a synchronous chapter load
     let START = 1;
 
-    const LAUNCH_IN_COMIC_MODE = ["pre0.json", "post0.json"];
+    const AVGTEXT_PATH = "./data/";
+    const LAUNCH_IN_COMIC_MODE = ["./data/pre0.json", "./data/post0.json"];
+
+    function getDataPath (path) {
+        if (path[0] === ".") {
+            return path;
+        }
+        return `${AVGTEXT_PATH}${path}`
+    }
 
     function fetchMediaContent (fileName) {
         // prevent undefined, remove need for cloning
@@ -73,7 +81,6 @@
 
     class Scene {
         constructor (chapterData, script, seq) {
-
             const self = this;
 
             this.data = clone(chapterData);
@@ -108,7 +115,7 @@
                         $(document).trigger(":scene-loaded"); // show start button
                     }
                 } else {
-                    readJSON(`data/${chapterData.parts}`, data => {
+                    readJSON(getDataPath(chapterData.parts), data => {
                         const script = clone(data);
                         self.script = script;
                         self.seq = processScript(script);

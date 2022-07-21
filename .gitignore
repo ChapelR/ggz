@@ -127,5 +127,6 @@ dist
 .pnp.*
 
 temp/images/**
+temp/dist/**
 **.bat
 twee/compiled/**
