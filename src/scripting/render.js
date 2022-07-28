@@ -59,7 +59,7 @@
     }
 
     function clearMarkedSprites () {
-        $("#sprites img[data-process=\"expired\"]").fadeOut(ANIMATION_TIME, function () {
+        $("#sprites").getExpired().fadeOut(ANIMATION_TIME, function () {
             // remove after animation completes
             const $self = $(this);
             $self.remove();
@@ -71,7 +71,7 @@
         });
         // remove rendering class (give 50ish ms for rendering)
         setTimeout( () => {
-            $("#sprites img[data-process=\"rendering\"]").idle();
+            $("#sprites").getRendering().idle();
             $(document).trigger(":render-end");
         }, Engine.minDomActionDelay || 50);
     }

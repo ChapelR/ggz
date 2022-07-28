@@ -12,9 +12,19 @@
     }
 
     Object.assign($.fn, {
+        // select based on process stage
+        getExpired : function () {
+            return this.find("img[data-process=\"expired\"]");
+        },
+        getRendering : function () {
+            return this.find("img[data-process=\"rendering\"]");
+        },
+        getIdle : function () {
+            return this.find("img[data-process=\"idle\"]");
+        },
         // rendering process
         process : function () {
-            // return process
+            // return process stage
             return getProcess(this);
         },
         expired : function () {
