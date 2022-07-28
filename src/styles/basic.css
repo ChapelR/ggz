@@ -261,6 +261,7 @@ nav h1 {
 #ui-dialog-close {
     font-weight: lighter;
     width: 2em;
+    box-shadow: none;
 }
 
 #ui-dialog-close:hover {

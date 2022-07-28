@@ -9,6 +9,7 @@ const jsOptions = {};
 const files = {
     // order is important
     js : [
+        "extensions.js",
         "preload.js",
         "audio.js",
         "cfg.js",

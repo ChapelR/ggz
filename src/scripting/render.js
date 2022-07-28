@@ -59,7 +59,7 @@
     }
 
     function clearMarkedSprites () {
-        $("#sprites img.expired").fadeOut(ANIMATION_TIME, function () {
+        $("#sprites img[data-process=\"expired\"]").fadeOut(ANIMATION_TIME, function () {
             // remove after animation completes
             const $self = $(this);
             $self.remove();
@@ -71,14 +71,14 @@
         });
         // remove rendering class (give 50ish ms for rendering)
         setTimeout( () => {
-            $("#sprites img.rendering").removeClass("rendering");
+            $("#sprites img[data-process=\"rendering\"]").idle();
             $(document).trigger(":render-end");
         }, Engine.minDomActionDelay || 50);
     }
 
     function initRenderProcess () {
         // start up render process, by marking existing sprites as expired
-        $("#sprites img").addClass("expired");
+        $("#sprites img").expired();
         $(document).trigger(":render-init");
     }
 
@@ -92,8 +92,7 @@
         if ($img) {
             // do not clear image
             $img
-                .removeClass("expired")
-                .addClass("rendering");
+                .rendering()
             if (spriteChanged($img, id, idx)) {
                 // render new image content
                 $img.attr({
@@ -108,7 +107,7 @@
                     "data-id" : id,
                     "data-idx" : idx
                 })
-                .addClass("rendering")
+                .rendering()
                 .appendTo("#sprites");
         }
 
@@ -116,11 +115,8 @@
         getPositionClass(position, $img);
 
         // set additional classes as appropriate
-        if (!!dim) {
-            $img.addClass("dim");
-        } else {
-            $img.removeClass("dim");
-        }
+        $img.dim(dim);
+        
         if ((id == 3 && !boost) || !!boost) { // always "boost" corrupted mei
             $img.addClass("boost");
         } else if (!boost) {
