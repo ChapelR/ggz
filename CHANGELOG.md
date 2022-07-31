@@ -1,8 +1,9 @@
-# Version 0.4.0
+# Version 0.3.1
 
 ## Technical
 - Added translation note feature. Now when the text features a translation note, a small icon will appear in the text box. Clicking this icon will show the note in a modal.
 - Certain media resource are now served directly from the GGZ Cutscene Interpreter site to slim the package that need to be hosted on Itch.io.
+- Internal improvements.
 
 # Version 0.3.0
 

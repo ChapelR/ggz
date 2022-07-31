@@ -1,12 +1,12 @@
 {
   "name": "ggz",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A VN-engine for GGZ cutscenes.",
   "main": "build.js",
   "scripts": {
     "build": "node build.js && tweego --head temp/head.html -o dist/index.html twee",
     "lint": "jshint src/scripting",
-    "start": "cd dist && http-server -c0 -o"
+    "start": "cd dist && npx http-server -c0 -o"
   },
   "repository": {
     "type": "git",
