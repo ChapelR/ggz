@@ -3,7 +3,7 @@
 
     setup.allPositions = ["p0", "p1", "p2", "p3", "p4"];
 
-    const RENDER_PATH = "https://ggz.amaryllisworks.pw/pic/";
+    const RENDER_PATH = "https://hg2.bluealice.xyz/pic/";
 
     const spritePositions = {
         "left" : "p0",

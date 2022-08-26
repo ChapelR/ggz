@@ -72,13 +72,23 @@
             portraits> [] [id, idx, dim]
         
         CG/BG:
-            -- the CG (bg) command
+            -- the CG (bg) command (TODO: these commands should do different stuff)
             cg> filename
             bg> filename
         
         SPEAKER:
             -- identifies speaker
             speaker> content
+
+        >>> NOT YET IMPLEMENTED!
+        
+        WIKIFIER:
+            -- run SugarCube code
+            -- should be a block, not one liner
+        
+        MODAL:
+            -- open a screen overlay with text/links
+            -- should be a block, not one liner
 
     */
 

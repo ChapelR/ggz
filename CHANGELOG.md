@@ -1,3 +1,7 @@
+# Version 0.3.2
+
+- Changed CDN for images.
+
 # Version 0.3.1
 
 ## Technical
