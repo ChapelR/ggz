@@ -1,6 +1,6 @@
 ## GGZ Cutscene Collection
 
-This is the source code for [GGZ Cutscene Collection](https://chapel.itch.io/ggz), a VN-style implementation of the cutscenes of the defunct (mostly) mobile game *Guns Girl Z* (AKA *Houkai Gakuen 2*), the predecessor to *Honkai Impact 3rd*, by MiHoYo. Data for the cutscenes, including scripts and assets, were acquired from the [GGZ cutscene interpreter project](https://hg2.bluealice.xyz/), which is also a great way to experience these cutscenes as more of a normal webpage.
+This is the source code for [GGZ Cutscene Collection](https://chapel.itch.io/ggz), a VN-style implementation of the cutscenes of the defunct (mostly) mobile game *Guns Girl Z* (AKA *Houkai Gakuen 2*), the predecessor to *Honkai Impact 3rd*, by MiHoYo. Data for the cutscenes, including scripts and assets, were acquired from the [GGZ cutscene interpreter project](https://ggz.amaryllisworks.pw/), which is also a great way to experience these cutscenes as more of a normal webpage.
 
 ![Screenshot](https://img.itch.zone/aW1hZ2UvMTU5NzY1My85MzUyMTY3LnBuZw==/original/Tdi4xn.png)
 
@@ -27,4 +27,4 @@ Open source software used:
 - [SugarCube](https://www.motoslave.net/sugarcube/2/)
 
 Art/assets/content provided by:
-- [GGZ cutscene interpreter](https://hg2.bluealice.xyz/)
+- [GGZ cutscene interpreter](https://ggz.amaryllisworks.pw/)
